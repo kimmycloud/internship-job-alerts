@@ -1,9 +1,16 @@
 import json
+import ssl
 import urllib.parse
 import urllib.request
 
+import certifi
+
 
 USER_AGENT = "internship-job-alerts/1.0"
+
+SSL_CONTEXT = ssl.create_default_context(
+    cafile=certifi.where()
+)
 
 
 def _with_content(endpoint):
@@ -26,8 +33,6 @@ def fetch_greenhouse_jobs(company):
     """
     Fetch and normalize all currently published jobs
     from one Greenhouse employer board.
-
-    company = one entry from companies.json
     """
 
     if company.get("provider") != "greenhouse":
@@ -52,7 +57,11 @@ def fetch_greenhouse_jobs(company):
         },
     )
 
-    with urllib.request.urlopen(request, timeout=30) as response:
+    with urllib.request.urlopen(
+        request,
+        timeout=30,
+        context=SSL_CONTEXT,
+    ) as response:
         if response.status != 200:
             raise RuntimeError(
                 f"Greenhouse returned HTTP {response.status}"
