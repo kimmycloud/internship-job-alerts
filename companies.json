@@ -1,0 +1,2339 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-09-29",
+  "scope": "Summer 2027 and future student roles, Toronto/GTA, Ottawa, Remote Canada",
+  "caveat": "Employer source seed, not a claim of an open Summer 2027 internship. Regions are monitoring targets; check each posting for eligibility and work location. HTML retrieval alone does not validate a job parser. Branded or unconfirmed providers require a separate implementation audit.",
+  "companies": [
+    {
+      "employer": "Tenstorrent",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "ML systems",
+        "hardware"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/tenstorrent",
+      "provider": "greenhouse",
+      "board_id": "tenstorrent",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/tenstorrent/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 125,
+      "sample_matching_locations": [
+        "Toronto, Ontario, Canada",
+        "Santa Clara, California, United States; Toronto, Ontario, Canada",
+        "Austin, Texas, United States; Boston, Massachusetts, United States; Raleigh, North Carolin",
+        "Belgrade, Serbia; Toronto, Ontario, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Tenstorrent",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Tenstorrent University",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "ML systems",
+        "hardware"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/tenstorrentuniversity",
+      "provider": "greenhouse",
+      "board_id": "tenstorrentuniversity",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/tenstorrentuniversity/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 6,
+      "sample_matching_locations": [
+        "Toronto, Ontario, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Tenstorrent",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Astera Labs Early Career 2027",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "firmware",
+        "verification"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/asteraearlycareer2027",
+      "provider": "greenhouse",
+      "board_id": "asteraearlycareer2027",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/asteraearlycareer2027/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 81,
+      "sample_matching_locations": [
+        "Toronto, Ontario, Canada",
+        "San Jose, CA or Toronto, Ontario, Canada",
+        "Ottawa, Canada",
+        "Vancouver, British Columbia, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Astera Labs",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Astera Labs Early Career 2026",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "firmware",
+        "verification"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/asteraearlycareer2026",
+      "provider": "greenhouse",
+      "board_id": "asteraearlycareer2026",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/asteraearlycareer2026/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 4,
+      "sample_matching_locations": [
+        "Toronto, Ontario, Canada",
+        "Vancouver, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Astera Labs",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Astera Labs",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "hardware"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/asteralabs",
+      "provider": "greenhouse",
+      "board_id": "asteralabs",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/asteralabs/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 173,
+      "sample_matching_locations": [
+        "Toronto, Ontario, Canada",
+        "Vancouver, British Columbia, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Astera Labs",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "DoorDash Canada",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "backend"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/doordashcanada",
+      "provider": "greenhouse",
+      "board_id": "doordashcanada",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/doordashcanada/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 35,
+      "sample_matching_locations": [
+        "Remote - Canada",
+        "Toronto, ON; Vancouver, BC",
+        "Vancouver, BC; Toronto, ON",
+        "Toronto, ON"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "DoorDash Canada",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Robinhood",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "fintech"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/robinhood",
+      "provider": "greenhouse",
+      "board_id": "robinhood",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/robinhood/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 159,
+      "sample_matching_locations": [
+        "Toronto, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Robinhood",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "BitGo",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "fintech"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/bitgo",
+      "provider": "greenhouse",
+      "board_id": "bitgo",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/bitgo/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 40,
+      "sample_matching_locations": [
+        "Remote"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "BitGo",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Cresta",
+      "regions_to_watch": [
+        "Toronto",
+        "Remote Canada"
+      ],
+      "focus": [
+        "ML systems",
+        "software"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/cresta",
+      "provider": "greenhouse",
+      "board_id": "cresta",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/cresta/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 95,
+      "sample_matching_locations": [
+        "United States (Remote)",
+        "Australia (Remote)",
+        "Toronto, Ontario",
+        "India (Remote)"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Cresta",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Celero Communications",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "circuits"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/celerocommunicationsinc",
+      "provider": "greenhouse",
+      "board_id": "celerocommunicationsinc",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/celerocommunicationsinc/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 25,
+      "sample_matching_locations": [
+        "Ottawa, Ontario, Canada",
+        "Ottawa, Ontario, Canada and Vancouver, British Columbia, Canada",
+        "Vancouver, British Columbia, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Celero Communications",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Spaceium",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "robotics",
+        "software"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/spaceium",
+      "provider": "greenhouse",
+      "board_id": "spaceium",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/spaceium/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 10,
+      "sample_matching_locations": [
+        "Ottawa, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Spaceium",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Ethernovia",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "embedded"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/ethernovia",
+      "provider": "greenhouse",
+      "board_id": "ethernovia",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/ethernovia/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 30,
+      "sample_matching_locations": [
+        "Canada - Remote",
+        "Toronto - Hybrid",
+        "Pune (Hybrid) (Remote- case to case) in India Only",
+        "United States - Remote"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Ethernovia",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Waterfront International",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "quant"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/wil",
+      "provider": "greenhouse",
+      "board_id": "wil",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/wil/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 3,
+      "sample_matching_locations": [
+        "Toronto, ONT"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Waterfront International",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Pine",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/pine",
+      "provider": "greenhouse",
+      "board_id": "pine",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/pine/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 3,
+      "sample_matching_locations": [
+        "Canada",
+        "Toronto, Ontario, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Pine",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Geotab",
+      "regions_to_watch": [
+        "GTA"
+      ],
+      "focus": [
+        "embedded",
+        "data",
+        "software"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/geotab",
+      "provider": "greenhouse",
+      "board_id": "geotab",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/geotab/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 90,
+      "sample_matching_locations": [
+        "Remote - Indonesia",
+        "Oakville, Ontario - Canada; Toronto, Ontario - Canada; Waterloo, Ontario - Canada",
+        "Oakville, Ontario - Canada",
+        "Burnaby, British Columbia - Canada; Oakville, Ontario - Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Geotab",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Stripe",
+      "regions_to_watch": [
+        "Toronto",
+        "Remote Canada"
+      ],
+      "focus": [
+        "fintech",
+        "backend"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/stripe",
+      "provider": "greenhouse",
+      "board_id": "stripe",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/stripe/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 703,
+      "sample_matching_locations": [
+        "Remote from the US",
+        "US-Remote-CA, US-San Francisco, US-Seattle, US-New York",
+        "US-San Francisco, US-Seattle, US-West Coast (Remote) ",
+        "Poland - Remote OR Romania - Remote"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Stripe",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Cloudflare",
+      "regions_to_watch": [
+        "Toronto",
+        "Remote Canada"
+      ],
+      "focus": [
+        "distributed systems",
+        "software"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/cloudflare",
+      "provider": "greenhouse",
+      "board_id": "cloudflare",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/cloudflare/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 399,
+      "sample_matching_locations": [
+        "Hybrid or Remote",
+        "Remote India",
+        "Remote"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Cloudflare",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "MongoDB",
+      "regions_to_watch": [
+        "Toronto",
+        "Remote Canada"
+      ],
+      "focus": [
+        "database",
+        "distributed systems"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/mongodb",
+      "provider": "greenhouse",
+      "board_id": "mongodb",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/mongodb/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 398,
+      "sample_matching_locations": [
+        "Toronto",
+        "Montreal; Toronto"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "MongoDB",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Cockroach Labs",
+      "regions_to_watch": [
+        "Remote Canada"
+      ],
+      "focus": [
+        "database",
+        "distributed systems"
+      ],
+      "careers_url": "https://job-boards.greenhouse.io/cockroachlabs",
+      "provider": "greenhouse",
+      "board_id": "cockroachlabs",
+      "method": "GET JSON",
+      "endpoint": "https://boards-api.greenhouse.io/v1/boards/cockroachlabs/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 19,
+      "sample_matching_locations": [
+        "Remote, Singapore",
+        "Remote, Australia"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Cockroach Labs",
+      "provider_detail": "greenhouse",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Telesat",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "satellite",
+        "embedded",
+        "software"
+      ],
+      "careers_url": "https://jobs.lever.co/telesat",
+      "provider": "lever",
+      "board_id": "telesat",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/telesat?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 46,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Telesat",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Kepler Communications",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "satellite",
+        "embedded",
+        "software"
+      ],
+      "careers_url": "https://jobs.lever.co/kepler",
+      "provider": "lever",
+      "board_id": "kepler",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/kepler?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 19,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Kepler Communications",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Syntronic",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "embedded",
+        "telecom"
+      ],
+      "careers_url": "https://jobs.lever.co/syntronic",
+      "provider": "lever",
+      "board_id": "syntronic",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/syntronic?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 24,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Syntronic",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Achievers",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "backend"
+      ],
+      "careers_url": "https://jobs.lever.co/achievers",
+      "provider": "lever",
+      "board_id": "achievers",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/achievers?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 17,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Achievers",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "EQ Bank",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software"
+      ],
+      "careers_url": "https://jobs.lever.co/eqbank",
+      "provider": "lever",
+      "board_id": "eqbank",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/eqbank?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 84,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "EQ Bank",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "AltaML",
+      "regions_to_watch": [
+        "Toronto",
+        "Remote Canada"
+      ],
+      "focus": [
+        "ML systems",
+        "data"
+      ],
+      "careers_url": "https://jobs.lever.co/altaml",
+      "provider": "lever",
+      "board_id": "altaml",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/altaml?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 7,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "AltaML",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Alif Semiconductor",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "embedded"
+      ],
+      "careers_url": "https://jobs.lever.co/alifsemi",
+      "provider": "lever",
+      "board_id": "alifsemi",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/alifsemi?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 11,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Alif Semiconductor",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Waabi",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "robotics",
+        "ML systems"
+      ],
+      "careers_url": "https://jobs.lever.co/waabi",
+      "provider": "lever",
+      "board_id": "waabi",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/waabi?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 87,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Waabi",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Fullscript",
+      "regions_to_watch": [
+        "Ottawa",
+        "Remote Canada"
+      ],
+      "focus": [
+        "software",
+        "data"
+      ],
+      "careers_url": "https://jobs.lever.co/fullscript",
+      "provider": "lever",
+      "board_id": "fullscript",
+      "method": "GET JSON",
+      "endpoint": "https://api.lever.co/v0/postings/fullscript?mode=json",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 17,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Fullscript",
+      "provider_detail": "lever",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Wealthsimple",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software",
+        "data"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/wealthsimple",
+      "provider": "ashby",
+      "board_id": "wealthsimple",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/wealthsimple",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 41,
+      "sample_matching_locations": [
+        "Toronto Headquarters",
+        "Remote (Canada)",
+        "Canada",
+        "Toronto, Ontario"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Wealthsimple",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Super.com",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "data",
+        "ML systems"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/super.com",
+      "provider": "ashby",
+      "board_id": "super.com",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/super.com",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 29,
+      "sample_matching_locations": [
+        "Canada",
+        "Toronto",
+        "Canada/United States"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Super.com",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Terminal",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "backend",
+        "data"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/terminal",
+      "provider": "ashby",
+      "board_id": "terminal",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/terminal",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 9,
+      "sample_matching_locations": [
+        "📍 Toronto, ON"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Terminal",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "OLIX",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "AI hardware",
+        "compiler"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/olix",
+      "provider": "ashby",
+      "board_id": "olix",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/olix",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 20,
+      "sample_matching_locations": [
+        "Toronto, CAN"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "OLIX",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Bree",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/bree",
+      "provider": "ashby",
+      "board_id": "bree",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/bree",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 13,
+      "sample_matching_locations": [
+        "Toronto",
+        "Canada",
+        "Remote"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Bree",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Tonal",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "embedded",
+        "software"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/tonal",
+      "provider": "ashby",
+      "board_id": "tonal",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/tonal",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 23,
+      "sample_matching_locations": [
+        "Toronto, ON"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Tonal",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Mecka",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "robotics",
+        "ML systems"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/mecka.ai",
+      "provider": "ashby",
+      "board_id": "mecka.ai",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/mecka.ai",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 28,
+      "sample_matching_locations": [
+        "Toronto GTA"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Mecka",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "NationGraph",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "data"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/NationGraph",
+      "provider": "ashby",
+      "board_id": "NationGraph",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/NationGraph",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 3,
+      "sample_matching_locations": [
+        "Toronto"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "NationGraph",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Zip",
+      "regions_to_watch": [
+        "Toronto",
+        "Remote Canada"
+      ],
+      "focus": [
+        "software",
+        "backend"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/zip",
+      "provider": "ashby",
+      "board_id": "zip",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/zip",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 122,
+      "sample_matching_locations": [
+        "Remote - West Coast",
+        "Toronto",
+        "Remote - US",
+        "Remote - Germany"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Zip",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Cohere",
+      "regions_to_watch": [
+        "Toronto",
+        "Remote Canada"
+      ],
+      "focus": [
+        "ML systems",
+        "software"
+      ],
+      "careers_url": "https://jobs.ashbyhq.com/cohere",
+      "provider": "ashby",
+      "board_id": "cohere",
+      "method": "GET JSON",
+      "endpoint": "https://api.ashbyhq.com/posting-api/job-board/cohere",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 145,
+      "sample_matching_locations": [
+        "Toronto",
+        "Canada",
+        "Ottawa"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Cohere",
+      "provider_detail": "ashby",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "AMD",
+      "regions_to_watch": [
+        "GTA"
+      ],
+      "focus": [
+        "semiconductor",
+        "hardware",
+        "firmware"
+      ],
+      "careers_url": "https://careers-amd.icims.com/jobs/search?ss=1",
+      "provider": "icims",
+      "board_id": "careers-amd",
+      "method": "GET HTML (iCIMS search)",
+      "endpoint": "https://careers-amd.icims.com/jobs/search?ss=1",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public iCIMS HTML search fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "AMD",
+      "provider_detail": "iCIMS",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "NVIDIA",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "semiconductor",
+        "ML systems"
+      ],
+      "careers_url": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite",
+      "provider": "workday",
+      "board_id": "NVIDIAExternalCareerSite",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://nvidia.wd5.myworkdayjobs.com/wday/cxs/nvidia/NVIDIAExternalCareerSite/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 2000,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "NVIDIA",
+      "provider_detail": "workday",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Intel",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "semiconductor",
+        "software"
+      ],
+      "careers_url": "https://intel.wd1.myworkdayjobs.com/en-US/External",
+      "provider": "workday",
+      "board_id": "External",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://intel.wd1.myworkdayjobs.com/wday/cxs/intel/External/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 606,
+      "sample_matching_locations": [
+        "Canada, Toronto"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Intel",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Cadence",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "EDA"
+      ],
+      "careers_url": "https://cadence.wd1.myworkdayjobs.com/en-US/External_Careers",
+      "provider": "workday",
+      "board_id": "External_Careers",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://cadence.wd1.myworkdayjobs.com/wday/cxs/cadence/External_Careers/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 616,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Cadence",
+      "provider_detail": "workday",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Cisco",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "networking",
+        "embedded"
+      ],
+      "careers_url": "https://cisco.wd5.myworkdayjobs.com/en-US/Cisco_Careers",
+      "provider": "workday",
+      "board_id": "Cisco_Careers",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://cisco.wd5.myworkdayjobs.com/wday/cxs/cisco/Cisco_Careers/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 1323,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Cisco",
+      "provider_detail": "workday",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Ciena",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "telecom",
+        "ASIC",
+        "embedded"
+      ],
+      "careers_url": "https://ciena.wd5.myworkdayjobs.com/en-US/Careers",
+      "provider": "workday",
+      "board_id": "Careers",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://ciena.wd5.myworkdayjobs.com/wday/cxs/ciena/Careers/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 141,
+      "sample_matching_locations": [
+        "Ottawa",
+        "Remote-Australia",
+        "Canada- Ottawa- 383 Terry Fox- Bldg C",
+        "Remote- India- Gurugram"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Ciena",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Lumentum",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "optics",
+        "embedded",
+        "hardware"
+      ],
+      "careers_url": "https://lumentum.wd5.myworkdayjobs.com/en-US/LITE",
+      "provider": "workday",
+      "board_id": "LITE",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://lumentum.wd5.myworkdayjobs.com/wday/cxs/lumentum/LITE/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 250,
+      "sample_matching_locations": [
+        "Canada - Ottawa (Bill Leathem)"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Lumentum",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "TD",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software"
+      ],
+      "careers_url": "https://td.wd3.myworkdayjobs.com/en-US/TD_Bank_Careers",
+      "provider": "workday",
+      "board_id": "TD_Bank_Careers",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://td.wd3.myworkdayjobs.com/wday/cxs/td/TD_Bank_Careers/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 1676,
+      "sample_matching_locations": [
+        "Toronto, Ontario"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "TD",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "RBC Early Talent",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software",
+        "data"
+      ],
+      "careers_url": "https://rbc.wd3.myworkdayjobs.com/en-US/RBCEARLYTALENT1",
+      "provider": "workday",
+      "board_id": "RBCEARLYTALENT1",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://rbc.wd3.myworkdayjobs.com/wday/cxs/rbc/RBCEARLYTALENT1/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 46,
+      "sample_matching_locations": [
+        "TORONTO, Ontario, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "RBC Early Talent",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "BMO Campus",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software",
+        "data"
+      ],
+      "careers_url": "https://bmo.wd3.myworkdayjobs.com/en-US/Campus",
+      "provider": "workday",
+      "board_id": "Campus",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://bmo.wd3.myworkdayjobs.com/wday/cxs/bmo/Campus/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 54,
+      "sample_matching_locations": [
+        "Toronto, ON, CAN"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "BMO Campus",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "CIBC Campus",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software"
+      ],
+      "careers_url": "https://cibc.wd3.myworkdayjobs.com/en-US/campus",
+      "provider": "workday",
+      "board_id": "campus",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://cibc.wd3.myworkdayjobs.com/wday/cxs/cibc/campus/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 55,
+      "sample_matching_locations": [
+        "Toronto, ON"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "CIBC Campus",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Manulife",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "data",
+        "ML systems"
+      ],
+      "careers_url": "https://manulife.wd3.myworkdayjobs.com/en-US/MFCJH_Jobs",
+      "provider": "workday",
+      "board_id": "MFCJH_Jobs",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://manulife.wd3.myworkdayjobs.com/wday/cxs/manulife/MFCJH_Jobs/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 721,
+      "sample_matching_locations": [
+        "USA, Texas - Full Time Remote",
+        "Toronto, Ontario",
+        "CAN, Quebec - Full Time Remote"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Manulife",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "TMX Group",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software"
+      ],
+      "careers_url": "https://tmx.wd3.myworkdayjobs.com/en-US/tmx_careers",
+      "provider": "workday",
+      "board_id": "tmx_careers",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://tmx.wd3.myworkdayjobs.com/wday/cxs/tmx/tmx_careers/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 89,
+      "sample_matching_locations": [
+        "Toronto - 100 Adelaide St W"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "TMX Group",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "P&G",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "data"
+      ],
+      "careers_url": "https://pg.wd5.myworkdayjobs.com/en-US/1000",
+      "provider": "workday",
+      "board_id": "1000",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://pg.wd5.myworkdayjobs.com/wday/cxs/pg/1000/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 811,
+      "sample_matching_locations": [
+        "BELLEVILLE PLANT-P&G CANADA"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "P&G",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Scotiabank",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software",
+        "data"
+      ],
+      "careers_url": "https://jobs.scotiabank.com/search/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://jobs.scotiabank.com/search/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Scotiabank",
+      "provider_detail": "SAP SuccessFactors",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Sun Life",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software"
+      ],
+      "careers_url": "https://sunlife.wd3.myworkdayjobs.com/en-US/Experienced-Jobs",
+      "provider": "workday",
+      "board_id": "Experienced-Jobs",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://sunlife.wd3.myworkdayjobs.com/wday/cxs/sunlife/Experienced-Jobs/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 286,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Sun Life",
+      "provider_detail": "workday",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Thomson Reuters",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "ML systems"
+      ],
+      "careers_url": "https://thomsonreuters.wd5.myworkdayjobs.com/en-US/External_Career_Site",
+      "provider": "workday",
+      "board_id": "External_Career_Site",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://thomsonreuters.wd5.myworkdayjobs.com/wday/cxs/thomsonreuters/External_Career_Site/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 459,
+      "sample_matching_locations": [],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Thomson Reuters",
+      "provider_detail": "workday",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Bell",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "telecom",
+        "software"
+      ],
+      "careers_url": "https://jobs.bell.ca/ca/en",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://jobs.bell.ca/ca/en",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Bell",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Rogers",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "telecom",
+        "software"
+      ],
+      "careers_url": "https://jobs.rogers.com/search/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://jobs.rogers.com/search/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Rogers",
+      "provider_detail": "SAP SuccessFactors",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Ericsson",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "telecom",
+        "software"
+      ],
+      "careers_url": "https://jobs.ericsson.com/careers",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://jobs.ericsson.com/careers",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Ericsson",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "General Dynamics Mission Systems Canada",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "embedded",
+        "systems",
+        "software"
+      ],
+      "careers_url": "https://careers.smartrecruiters.com/GDMSI",
+      "provider": "smartrecruiters",
+      "board_id": "GDMSI",
+      "method": "GET JSON; page with offset",
+      "endpoint": "https://api.smartrecruiters.com/v1/companies/GDMSI/postings?limit=100",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 114,
+      "sample_matching_locations": [
+        "Ottawa"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "General Dynamics Mission Systems Canada",
+      "provider_detail": "smartrecruiters",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Canadian Bank Note",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "software",
+        "security"
+      ],
+      "careers_url": "https://careers.smartrecruiters.com/CanadianBankNoteCompany",
+      "provider": "smartrecruiters",
+      "board_id": "CanadianBankNoteCompany",
+      "method": "GET JSON; page with offset",
+      "endpoint": "https://api.smartrecruiters.com/v1/companies/CanadianBankNoteCompany/postings?limit=100",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 19,
+      "sample_matching_locations": [
+        "Ottawa"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Canadian Bank Note",
+      "provider_detail": "smartrecruiters",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Assent SmartRecruiters",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "software",
+        "data"
+      ],
+      "careers_url": "https://careers.smartrecruiters.com/Assent",
+      "provider": "smartrecruiters",
+      "board_id": "Assent",
+      "method": "GET JSON; page with offset",
+      "endpoint": "https://api.smartrecruiters.com/v1/companies/Assent/postings?limit=100",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 22,
+      "sample_matching_locations": [
+        "Ottawa",
+        "Toronto"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Assent SmartRecruiters",
+      "provider_detail": "smartrecruiters",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Sectigo",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "security",
+        "software"
+      ],
+      "careers_url": "https://careers.smartrecruiters.com/Sectigo",
+      "provider": "smartrecruiters",
+      "board_id": "Sectigo",
+      "method": "GET JSON; page with offset",
+      "endpoint": "https://api.smartrecruiters.com/v1/companies/Sectigo/postings?limit=100",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 26,
+      "sample_matching_locations": [
+        "Ottawa"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Sectigo",
+      "provider_detail": "smartrecruiters",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Microsoft",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "cloud",
+        "software",
+        "ML systems"
+      ],
+      "careers_url": "https://jobs.careers.microsoft.com/global/en/search",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://jobs.careers.microsoft.com/global/en/search",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Microsoft",
+      "provider_detail": "Eightfold-style branded platform (HTML fingerprint; verify before adapter)",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Google",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "software",
+        "ML systems"
+      ],
+      "careers_url": "https://www.google.com/about/careers/applications/jobs/results/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://www.google.com/about/careers/applications/jobs/results/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Google",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Amazon",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "cloud",
+        "software",
+        "hardware"
+      ],
+      "careers_url": "https://www.amazon.jobs/en/search",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://www.amazon.jobs/en/search",
+      "http_status": 200,
+      "accessible": false,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "HTTP 200 but returned content was not recognizable HTML; monitor manually until endpoint is resolved",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Amazon",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Apple",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "hardware",
+        "software"
+      ],
+      "careers_url": "https://jobs.apple.com/en-ca/search",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://jobs.apple.com/en-ca/search",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Apple",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "IBM",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "software",
+        "ML systems"
+      ],
+      "careers_url": "https://www.ibm.com/careers/search",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://www.ibm.com/careers/search",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "IBM",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Nokia",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "telecom",
+        "embedded"
+      ],
+      "careers_url": "https://jobs.nokia.com/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://jobs.nokia.com/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Nokia",
+      "provider_detail": "Oracle Recruiting",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "BlackBerry QNX",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "embedded",
+        "software"
+      ],
+      "careers_url": "https://www.blackberry.com/us/en/company/careers",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://www.blackberry.com/us/en/company/careers",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "BlackBerry QNX Jobs",
+      "provider_detail": "Workday (corporate landing)",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Solace",
+      "regions_to_watch": [
+        "Ottawa",
+        "Remote Canada"
+      ],
+      "focus": [
+        "distributed systems",
+        "software"
+      ],
+      "careers_url": "https://solace.bamboohr.com/careers",
+      "provider": "bamboohr",
+      "board_id": "solace",
+      "method": "GET JSON",
+      "endpoint": "https://solace.bamboohr.com/careers/list",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 21,
+      "sample_matching_locations": [
+        "Ottawa"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Solace",
+      "provider_detail": "BambooHR (Solace event-mesh company)",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Kinaxis",
+      "regions_to_watch": [
+        "Ottawa",
+        "Remote Canada"
+      ],
+      "focus": [
+        "software",
+        "data"
+      ],
+      "careers_url": "https://join.kinaxis.com/jobs/categories",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://join.kinaxis.com/jobs/categories",
+      "http_status": 403,
+      "accessible": false,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "official careers page indexed with Ottawa co-ops, but direct fetch 403 in this environment",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Kinaxis",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Ross Video",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "embedded",
+        "hardware",
+        "software"
+      ],
+      "careers_url": "https://www.rossvideo.com/company/careers/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://www.rossvideo.com/company/careers/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Ross Video",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "MDA Space",
+      "regions_to_watch": [
+        "GTA",
+        "Ottawa"
+      ],
+      "focus": [
+        "space",
+        "embedded",
+        "hardware"
+      ],
+      "careers_url": "https://mda.space/en/careers",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://mda.space/en/careers",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "MDA Space",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Magna",
+      "regions_to_watch": [
+        "GTA"
+      ],
+      "focus": [
+        "automotive",
+        "embedded",
+        "robotics"
+      ],
+      "careers_url": "https://www.magna.com/careers",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://www.magna.com/careers",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Magna",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "ATS Corporation",
+      "regions_to_watch": [
+        "GTA"
+      ],
+      "focus": [
+        "robotics",
+        "automation",
+        "embedded"
+      ],
+      "careers_url": "https://atsautomation.com/careers/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://atsautomation.com/careers/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "ATS Corporation",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Clearpath Robotics / OTTO Motors",
+      "regions_to_watch": [
+        "GTA"
+      ],
+      "focus": [
+        "robotics",
+        "embedded"
+      ],
+      "careers_url": "https://clearpathrobotics.com/careers/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://clearpathrobotics.com/careers/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Rockwell Automation / Clearpath",
+      "provider_detail": "Rockwell Automation / Workday (corporate landing)",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "OpenText",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "software",
+        "backend"
+      ],
+      "careers_url": "https://careers.opentext.com/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://careers.opentext.com/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "OpenText",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Celestica",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "hardware",
+        "embedded",
+        "manufacturing"
+      ],
+      "careers_url": "https://careers.celestica.com/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://careers.celestica.com/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Celestica",
+      "provider_detail": "SAP SuccessFactors",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Synopsys",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa"
+      ],
+      "focus": [
+        "semiconductor",
+        "EDA"
+      ],
+      "careers_url": "https://careers.synopsys.com/search-jobs",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://careers.synopsys.com/search-jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Synopsys",
+      "provider_detail": "Avature",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Arm",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "semiconductor",
+        "hardware"
+      ],
+      "careers_url": "https://careers.arm.com/search-jobs",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://careers.arm.com/search-jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Arm",
+      "provider_detail": "branded careers (iCIMS link fingerprint; verify before adapter)",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "BlackBerry QNX Jobs",
+      "regions_to_watch": [
+        "Ottawa"
+      ],
+      "focus": [
+        "embedded",
+        "software"
+      ],
+      "careers_url": "https://bb.wd3.myworkdayjobs.com/en-US/BlackBerry",
+      "provider": "workday",
+      "board_id": "BlackBerry",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://bb.wd3.myworkdayjobs.com/wday/cxs/bb/BlackBerry/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 23,
+      "sample_matching_locations": [
+        "Ottawa, Ontario"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "BlackBerry QNX",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Rockwell Automation / Clearpath",
+      "regions_to_watch": [
+        "GTA"
+      ],
+      "focus": [
+        "robotics",
+        "embedded"
+      ],
+      "careers_url": "https://rockwellautomation.wd1.myworkdayjobs.com/en-US/External_Rockwell_Automation",
+      "provider": "workday",
+      "board_id": "External_Rockwell_Automation",
+      "method": "POST JSON {\"appliedFacets\":{},\"limit\":20,\"offset\":0,\"searchText\":\"\"}",
+      "endpoint": "https://rockwellautomation.wd1.myworkdayjobs.com/wday/cxs/rockwellautomation/External_Rockwell_Automation/jobs",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": true,
+      "jobs_reported": 419,
+      "sample_matching_locations": [
+        "Kitchener, Ontario, Canada",
+        "Cambridge, Ontario, Canada"
+      ],
+      "verification": "public JSON parsed",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Rockwell Automation / Clearpath",
+      "provider_detail": "workday",
+      "region_evidence": "sampled board locations"
+    },
+    {
+      "employer": "Shopify",
+      "regions_to_watch": [
+        "Toronto",
+        "Ottawa",
+        "Remote Canada"
+      ],
+      "focus": [
+        "software",
+        "backend",
+        "ML systems"
+      ],
+      "careers_url": "https://www.shopify.com/careers",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://www.shopify.com/careers",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Shopify",
+      "provider_detail": "branded careers; ATS unconfirmed",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "Float",
+      "regions_to_watch": [
+        "Toronto"
+      ],
+      "focus": [
+        "fintech",
+        "software"
+      ],
+      "careers_url": "https://floatfinancial.com/careers/",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://floatfinancial.com/careers/",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "Float",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    },
+    {
+      "employer": "StackAdapt",
+      "regions_to_watch": [
+        "Toronto",
+        "Remote Canada"
+      ],
+      "focus": [
+        "ML systems",
+        "software"
+      ],
+      "careers_url": "https://www.stackadapt.com/careers",
+      "provider": "branded_or_unconfirmed",
+      "board_id": null,
+      "method": "GET HTML",
+      "endpoint": "https://www.stackadapt.com/careers",
+      "http_status": 200,
+      "accessible": true,
+      "monitoring_ready": false,
+      "jobs_reported": null,
+      "sample_matching_locations": [],
+      "verification": "public landing/list HTML fetched; job extraction unverified",
+      "checked_on": "2026-09-29",
+      "canonical_employer": "StackAdapt",
+      "provider_detail": "custom",
+      "region_evidence": "research target; location not established by this endpoint sample"
+    }
+  ],
+  "methodology": "2026-09-29 unauthenticated HTTP GET or public Workday POST, 16-second timeout, up to 12 MB response. JSON parsed where stated. HTML status only proves landing retrieval, not a robust parser. No login, access-control bypass, or proxy.",
+  "adapter_priority": [
+    "greenhouse",
+    "lever",
+    "ashby",
+    "workday",
+    "smartrecruiters",
+    "bamboohr"
+  ]
+}
