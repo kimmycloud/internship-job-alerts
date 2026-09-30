@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "profiles": [
+    {
+      "id": "sample_software",
+      "education": {"year": 3, "degree": "Software Engineering"},
+      "target_seasons": ["summer_2027"],
+      "role_families": ["backend", "general_swe"],
+      "preferred_locations": ["canada_unspecified"],
+      "skills": ["Python"],
+      "experience_level": "student"
+    },
+    {
+      "id": "sample_hardware",
+      "education": {"year": 3, "degree": "Mechanical Engineering"},
+      "target_seasons": ["summer_2027"],
+      "role_families": ["robotics_hardware", "validation"],
+      "preferred_locations": ["other_canadian_city"],
+      "skills": ["CAD"],
+      "experience_level": "student"
+    }
+  ]
+}

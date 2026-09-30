@@ -1,2 +1,10 @@
 __pycache__/
 *.py[cod]
+.env
+.env.local
+.env.*.local
+private/
+profiles.local.json
+profiles.private.json
+candidate_profiles.json
+!.env.example

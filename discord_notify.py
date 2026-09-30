@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import urllib.request
 
 
@@ -31,8 +32,25 @@ def send_internship_alert(
     matches,
     posted=None,
     javascript_exposure=None,
+    profiles=None,
 ):
     webhook = os.environ["INTERNSHIP_DISCORD_WEBHOOK_URL"]
+    # Matcher results and public callers use anonymous IDs. Private runtime data
+    # may supply a friendly label or Discord mention for a specific recipient.
+    labels = []
+    mention_ids = []
+    for profile_id in matches:
+        if not isinstance(profile_id, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", profile_id):
+            raise ValueError("Matches must contain anonymous profile IDs")
+        profile = (profiles or {}).get(profile_id, {})
+        discord_id = profile.get("discord_user_id")
+        if discord_id is not None and not re.fullmatch(r"\d{17,20}", discord_id):
+            raise ValueError("Invalid private Discord user ID")
+        if discord_id:
+            labels.append(f"<@{discord_id}>")
+            mention_ids.append(discord_id)
+        else:
+            labels.append(profile.get("display_name") or profile_id)
 
     fields = [
         {
@@ -42,7 +60,7 @@ def send_internship_alert(
         },
         {
             "name": "🎯 Matches",
-            "value": ", ".join(matches),
+            "value": ", ".join(labels) or "None",
             "inline": True,
         },
     ]
@@ -66,6 +84,7 @@ def send_internship_alert(
         )
 
     payload = {
+        "allowed_mentions": {"users": mention_ids},
         "embeds": [
             {
                 "title": f"{company} — {title}",

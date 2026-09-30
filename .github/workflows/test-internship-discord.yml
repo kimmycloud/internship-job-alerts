@@ -28,7 +28,7 @@ jobs:
               title="Software Engineering Intern",
               location="Toronto, ON",
               url="https://example.com/job",
-              matches=["Profile A", "Profile B"],
+              matches=["sample_software", "sample_hardware"],
               posted="Just posted",
               javascript_exposure="⚪ NONE",
           )
