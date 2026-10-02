@@ -10,16 +10,24 @@ from job_matcher import match_profiles
 from job_normalizer import deduplicate, freshness, normalize_job
 from profiles import PUBLIC_PROFILE_IDS, ProfileError, load_profiles
 from sources.greenhouse import fetch_greenhouse_jobs
+from sources.ashby import fetch_ashby_jobs
+from sources.lever import fetch_lever_jobs
+from sources.smartrecruiters import fetch_smartrecruiters_jobs
+from sources.workday import fetch_workday_jobs
+from sources.bamboohr import fetch_bamboohr_jobs
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_REPORT = ROOT / 'dry_run_matches.json'
 BUCKET_ORDER = {'NEW': 0, 'RECENT': 1, 'UNKNOWN': 2, 'OLDER': 3}
+ADAPTERS = {'greenhouse': fetch_greenhouse_jobs, 'ashby': fetch_ashby_jobs,
+            'lever': fetch_lever_jobs, 'smartrecruiters': fetch_smartrecruiters_jobs,
+            'workday': fetch_workday_jobs, 'bamboohr': fetch_bamboohr_jobs}
 
 
 def monitored_sources(registry_path=ROOT / 'companies.json'):
     registry = json.loads(Path(registry_path).read_text(encoding='utf-8'))
     return [source for source in registry['companies']
-            if source.get('provider') == 'greenhouse' and source.get('monitoring_ready') is True]
+            if source.get('provider') in ADAPTERS and source.get('monitoring_ready') is True]
 
 
 def source_coverage(registry_path=ROOT / 'companies.json', errors=None, fetched=None):
@@ -32,7 +40,7 @@ def source_coverage(registry_path=ROOT / 'companies.json', errors=None, fetched=
         name = source.get('canonical_employer') or source['employer']
         if source['employer'] in failures:
             status, outcome = 'BROKEN', 'FETCH_FAILED'
-        elif source.get('provider') == 'greenhouse' and source.get('monitoring_ready'):
+        elif source.get('provider') in ADAPTERS and source.get('monitoring_ready'):
             status = 'MONITORING_READY'
             outcome = ('VALID_ZERO_JOBS' if fetched.get(source['employer']) == 0 else
                        'FETCH_OK' if source['employer'] in fetched else 'NOT_FETCHED')
@@ -64,7 +72,12 @@ def source_coverage(registry_path=ROOT / 'companies.json', errors=None, fetched=
             'employers': rows}
 
 
-def fetch_jobs(sources, fetcher=fetch_greenhouse_jobs):
+def fetch_source(source):
+    return ADAPTERS[source['provider']](source)
+
+
+def fetch_jobs(sources, fetcher=None):
+    fetcher = fetcher or fetch_source
     jobs, errors, fetched = [], [], {}
     with ThreadPoolExecutor(max_workers=6) as pool:
         futures = {pool.submit(fetcher, source): source for source in sources}

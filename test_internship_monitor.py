@@ -136,7 +136,7 @@ class MonitorTests(unittest.TestCase):
             registry.write_text(json.dumps({'companies': [
                 {'employer': 'Empty', 'provider': 'greenhouse', 'monitoring_ready': True},
                 {'employer': 'Failed', 'provider': 'greenhouse', 'monitoring_ready': True},
-                {'employer': 'Partial', 'provider': 'lever', 'monitoring_ready': True},
+                {'employer': 'Partial', 'provider': 'unknown_ats', 'monitoring_ready': True},
                 {'employer': 'No Route', 'provider': 'branded_or_unconfirmed', 'monitoring_ready': False, 'accessible': True},
             ]}))
             sources = [{'employer': 'Empty'}, {'employer': 'Failed'}]
