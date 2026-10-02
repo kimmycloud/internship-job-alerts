@@ -69,10 +69,17 @@ def fetch_greenhouse_jobs(company):
 
         data = json.load(response)
 
+    if not isinstance(data, dict) or not isinstance(data.get("jobs"), list):
+        raise ValueError("Invalid Greenhouse jobs response")
+
     jobs = []
 
     for job in data.get("jobs", []):
+        if not isinstance(job, dict) or job.get("id") is None:
+            raise ValueError("Invalid Greenhouse job entry")
         location = job.get("location") or {}
+        if not isinstance(location, dict):
+            raise ValueError("Invalid Greenhouse location")
 
         jobs.append(
             {

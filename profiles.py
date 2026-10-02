@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 DEFAULT_PRIVATE_FILE = Path(__file__).resolve().parent / "private/profiles.local.json"
+PUBLIC_PROFILE_IDS = tuple(f"profile_{index:02d}" for index in range(1, 5))
 ID_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 LOCATIONS = {
     "toronto_gta", "ottawa", "remote_canada", "canada_unspecified",

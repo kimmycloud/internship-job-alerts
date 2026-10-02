@@ -1,0 +1,21 @@
+name: Test Internship Matching
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run tests
+        run: python -m unittest discover -p 'test_*.py'
+      - name: Fetch and match in dry-run mode
+        env:
+          CANDIDATE_PROFILES_JSON: ${{ secrets.CANDIDATE_PROFILES_JSON }}
+        run: python internship_monitor.py --dry-run

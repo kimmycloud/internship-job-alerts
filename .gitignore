@@ -8,3 +8,6 @@ profiles.local.json
 profiles.private.json
 candidate_profiles.json
 !.env.example
+dry_run_matches.json
+dry_run_*.json
+*.log
