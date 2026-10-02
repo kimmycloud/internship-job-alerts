@@ -91,6 +91,19 @@ class AdapterTests(unittest.TestCase):
             with patch('sources.workday.get_json', side_effect=payloads), self.assertRaises(ValueError):
                 fetch_workday_jobs(source('workday'))
 
+    def test_workday_zero_subsequent_total_and_malformed_pg_entry(self):
+        valid = {'externalPath': '/job/a', 'title': 'Intern'}
+        with patch('sources.workday.get_json', side_effect=[
+            {'total': 2, 'jobPostings': [valid]},
+            {'total': 0, 'jobPostings': [{'externalPath': '/job/b', 'title': 'Engineer'}]},
+        ]):
+            self.assertEqual(len(fetch_workday_jobs(source('workday'))), 2)
+        with patch('sources.workday.get_json', side_effect=[
+            {'total': 2, 'jobPostings': [valid]},
+            {'total': 0, 'jobPostings': [{'bulletFields': ['public malformed listing']}]},
+        ]), self.assertRaisesRegex(ValueError, 'Malformed ATS job entry'):
+            fetch_workday_jobs(source('workday'))
+
 
 if __name__ == '__main__':
     unittest.main()

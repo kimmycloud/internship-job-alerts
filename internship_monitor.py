@@ -5,6 +5,7 @@ from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 from pathlib import Path
+from urllib.error import HTTPError
 
 from job_matcher import match_profiles
 from job_normalizer import deduplicate, freshness, normalize_job
@@ -22,6 +23,31 @@ BUCKET_ORDER = {'NEW': 0, 'RECENT': 1, 'UNKNOWN': 2, 'OLDER': 3}
 ADAPTERS = {'greenhouse': fetch_greenhouse_jobs, 'ashby': fetch_ashby_jobs,
             'lever': fetch_lever_jobs, 'smartrecruiters': fetch_smartrecruiters_jobs,
             'workday': fetch_workday_jobs, 'bamboohr': fetch_bamboohr_jobs}
+SAFE_ADAPTER_ERRORS = {
+    'Invalid BambooHR source configuration', 'Malformed or incomplete BambooHR response',
+    'Duplicate BambooHR job ID', 'Malformed BambooHR location',
+    'Invalid Ashby source configuration', 'Malformed Ashby response', 'Duplicate Ashby job ID',
+    'Invalid Lever source configuration', 'Malformed Lever response',
+    'Duplicate Lever job ID', 'Malformed Lever categories',
+    'Invalid Greenhouse jobs response', 'Invalid Greenhouse job entry', 'Invalid Greenhouse location',
+    'Invalid SmartRecruiters source configuration', 'Malformed SmartRecruiters response',
+    'SmartRecruiters total changed during pagination', 'Incomplete SmartRecruiters page',
+    'Duplicate SmartRecruiters job ID', 'Malformed SmartRecruiters location',
+    'SmartRecruiters page exceeds total', 'Incomplete SmartRecruiters listing',
+    'Invalid Workday source configuration', 'Malformed Workday response',
+    'Workday total changed during pagination', 'Incomplete Workday page',
+    'Malformed Workday job path', 'Duplicate Workday job ID',
+    'Workday page exceeds total', 'Incomplete Workday listing', 'Malformed ATS job entry',
+}
+
+
+def safe_source_error(exc):
+    """Expose adapter diagnostics, never arbitrary upstream text or request URLs."""
+    if isinstance(exc, ValueError) and str(exc) in SAFE_ADAPTER_ERRORS:
+        return str(exc)
+    if isinstance(exc, HTTPError):
+        return f'HTTP {exc.code}'
+    return type(exc).__name__
 
 
 def monitored_sources(registry_path=ROOT / 'companies.json'):
@@ -88,7 +114,8 @@ def fetch_jobs(sources, fetcher=None):
                 fetched[source['employer']] = len(source_jobs)
                 jobs.extend(source_jobs)
             except Exception as exc:
-                errors.append({'source': source['employer'], 'error_type': type(exc).__name__})
+                errors.append({'source': source['employer'], 'provider': source.get('provider', 'unknown'),
+                               'error_type': type(exc).__name__, 'message': safe_source_error(exc)})
     return jobs, sorted(errors, key=lambda item: item['source']), fetched
 
 
@@ -116,7 +143,7 @@ def rejection_reason(job, decisions):
         return 'not student role'
     if job['summer_2027_relevance'] == 'other':
         return 'eligibility mismatch'
-    if job['location_normalized'] in {'us', 'international'}:
+    if job['location_normalized'] == 'non_canada':
         return 'location mismatch'
     if not job['role_families']:
         return 'insufficient information'
@@ -186,7 +213,7 @@ def print_report(report, review=False, top=10):
     print(f"Successful sources: {summary['successful_sources']}")
     print(f"Errors: {len(summary['provider_errors'])}")
     for error in summary['provider_errors']:
-        print(f"  {error['source']}: {error['error_type']}")
+        print(f"  {error['source']} [{error.get('provider', 'unknown')}]: {error.get('message', error['error_type'])}")
     print('\n=== STUDENT ROLES ===')
     print(f"Candidate student roles: {summary['student_roles']}")
     print(f"Unmatched student roles: {summary['unmatched_student_roles']}")

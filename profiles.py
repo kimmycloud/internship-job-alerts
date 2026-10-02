@@ -11,10 +11,10 @@ PUBLIC_PROFILE_IDS = tuple(f"profile_{index:02d}" for index in range(1, 5))
 ID_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 LOCATIONS = {
     "toronto_gta", "ottawa", "remote_canada", "canada_unspecified",
-    "other_canadian_city", "us", "unknown",
+    "other_canadian_city", "non_canada", "us", "unknown",
 }
 ROLE_FAMILIES = {
-    "frontend", "backend", "full_stack", "general_swe", "systems",
+    "frontend", "backend", "mobile", "full_stack", "general_swe", "systems",
     "distributed_systems", "data", "ml_infra", "ml_systems", "ai_software",
     "embedded", "networking", "telecom", "hardware_design",
     "design_verification", "rtl", "asic", "fpga", "pcb", "circuits",

@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 from job_matcher import javascript_intensity, match_job, normalize_location
-from profiles import ProfileError, load_profiles
+from profiles import ProfileError, load_profiles, validate_profiles
 
 
 ROOT = Path(__file__).resolve().parent
@@ -33,6 +33,11 @@ def job(title, location="Toronto, ON", description="", **extra):
 
 
 class LoaderTests(unittest.TestCase):
+    def test_mobile_and_explicit_foreign_preference_are_valid(self):
+        data = {"schema_version": 1, "profiles": [{**SYNTHETIC['profiles'][0],
+                "role_families": ["mobile"], "preferred_locations": ["non_canada"]}]}
+        self.assertIn('sample_ml', validate_profiles(data))
+
     def test_environment_precedes_file(self):
         profiles = load_profiles({"CANDIDATE_PROFILES_JSON": json.dumps(SYNTHETIC), "PRIVATE_PROFILES_FILE": "/nonexistent"})
         self.assertEqual(set(profiles), {"sample_ml", "sample_ui", "sample_chip"})
@@ -82,7 +87,7 @@ class MatcherTests(unittest.TestCase):
         cases = {"Mississauga, ON": "toronto_gta", "Kanata, Ontario": "ottawa",
                  "Remote - Canada": "remote_canada", "Remote": "unknown",
                  "Canada": "canada_unspecified", "Vancouver, BC": "other_canadian_city",
-                 "New York, USA": "us", "": "unknown"}
+                 "New York, USA": "non_canada", "": "unknown"}
         for text, expected in cases.items():
             with self.subTest(text=text):
                 self.assertEqual(normalize_location(text), expected)
@@ -101,6 +106,36 @@ class MatcherTests(unittest.TestCase):
         result = match_job(job("ML Infrastructure Intern", location="Remote"), self.profiles["sample_ml"])
         self.assertEqual(result["score_components"]["location"], "unknown")
         self.assertTrue(any("unknown" in warning.lower() for warning in result["warnings"]))
+
+    def test_foreign_locations_and_canadian_option(self):
+        foreign = ('China, Shanghai', 'SHANGHAI', 'BEIJING', 'Brazil, Belo Horizonte',
+                   'BELO HORIZONTE', 'United States', 'USA', 'California', 'San Jose, CA, USA',
+                   'Costa Rica, San Jose', 'Malaysia, Penang', 'Vietnam, Ho_Chi_Minh_City',
+                   'Lysaker, Norway', 'Mount Laurel, New Jersey', 'Bengaluru', 'Bucharest')
+        for location in foreign:
+            with self.subTest(location=location):
+                self.assertEqual(normalize_location(location), 'non_canada')
+                self.assertFalse(match_job(job('ML Infrastructure Intern', location), self.profiles['sample_ml'])['matched'])
+        self.assertEqual(normalize_location('San Jose, CA or Toronto, Ontario, Canada'), 'toronto_gta')
+        self.assertTrue(match_job(job('ML Infrastructure Intern', 'San Jose, CA or Toronto, Ontario, Canada'), self.profiles['sample_ml'])['matched'])
+        self.assertEqual(normalize_location('London'), 'unknown')
+        allowed = {**self.profiles['sample_ml'], 'preferred_locations': ['non_canada']}
+        self.assertTrue(match_job(job('ML Infrastructure Intern', 'China, Shanghai'), allowed)['matched'])
+
+    def test_mobile_title_overrides_incidental_backend(self):
+        from job_matcher import classify_role_families
+        cases = [
+            ('Software Developer Intern, iOS (Summer 2027)', 'Backend API team collaboration', {'mobile', 'general_swe'}, {'backend'}),
+            ('Android Mobile Software Engineering Intern', 'Uses backend APIs', {'mobile', 'general_swe'}, {'backend'}),
+            ('Backend Software Engineering Intern', 'Serves mobile clients', {'backend', 'general_swe'}, {'mobile'}),
+            ('Full-Stack Software Engineering Intern', 'Build mobile clients and APIs', {'full_stack', 'general_swe'}, {'mobile'}),
+            ('Backend API Software Engineering Intern', 'Consumed by iOS apps', {'backend', 'general_swe'}, {'mobile'}),
+        ]
+        for title, description, included, excluded in cases:
+            with self.subTest(title=title):
+                families = classify_role_families(job(title, description=description))
+                self.assertTrue(included <= families)
+                self.assertFalse(excluded & families)
 
     def test_greenhouse_shape_and_wrong_season(self):
         greenhouse_job = {"title": "ML Infrastructure Intern - Summer 2026", "location": "Toronto, ON",

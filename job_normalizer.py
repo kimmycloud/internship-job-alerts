@@ -38,7 +38,7 @@ def normalize_job(raw):
     job['student_role'] = internship_eligibility(job) is True
     if job['location_normalized'] == 'unknown':
         title_location = normalize_location(title)
-        if title_location in {'us', 'toronto_gta', 'ottawa', 'other_canadian_city', 'international'}:
+        if title_location in {'non_canada', 'toronto_gta', 'ottawa', 'other_canadian_city'}:
             job['location_normalized'] = title_location
             job['normalized_location'] = title_location
     text = title + ' ' + re.sub(r'<[^>]+>', ' ', description)

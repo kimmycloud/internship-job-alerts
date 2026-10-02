@@ -11,6 +11,7 @@ FAMILY_PATTERNS = {
     "distributed_systems": r"\bdistributed systems?\b",
     "frontend": r"\bfront[ -]?end\b|\bui engineer(?:ing)?\b|\breact\b",
     "backend": r"\bback[ -]?end\b|\bserver[ -]?side\b|\bapi development\b",
+    "mobile": r"\b(?:ios|android|mobile)\b",
     "full_stack": r"\bfull[ -]?stack\b",
     "systems": r"\bsystems? software\b|\bsystems? engineer(?:ing)?\b|\boperating systems?\b",
     "data": r"\bdata engineer(?:ing)?\b|\bdata platform\b|\bdata pipelines?\b",
@@ -53,20 +54,18 @@ def normalize_location(location):
     remote = bool(re.search(r"\bremote\b", text))
     canada = bool(re.search(r"\bcanada\b|\bcanadian\b", text))
     us = bool(re.search(r"\b(?:united states|u\.?s\.?a?\.?|usa)\b", text))
-    if remote:
-        return "us" if us else "remote_canada" if canada else "unknown"
+    if remote and canada:
+        return "remote_canada"
     if re.search(r"\b(?:toronto|mississauga|brampton|markham|vaughan|richmond hill|scarborough|north york|etobicoke|oakville|burlington|gta|greater toronto)\b", text):
         return "toronto_gta"
     if re.search(r"\b(?:ottawa|kanata|nepean)\b", text):
         return "ottawa"
-    if us:
-        return "us"
-    if re.search(r"\b(?:san jose|san francisco|new york|seattle|boston|austin|palo alto|menlo park|mountain view|santa clara|sunnyvale|los angeles|chicago|atlanta|bellevue|redmond|denver|portland|washington,? d\.?c\.?)\b", text) or re.search(r",\s*(?:ca|ny|wa|ma|tx|il|ga|co|or|nj|va|nc|fl|az)\b", text):
-        return "us"
-    if re.search(r"\b(?:singapore|india|united kingdom|london|germany|france|australia|israel|taiwan|japan|poland|ireland|netherlands)\b", text):
-        return "international"
     if canada or re.search(r"\b(?:vancouver|montreal|montréal|calgary|edmonton|waterloo|kitchener|hamilton|halifax|winnipeg|victoria|quebec|québec|on|bc|ab|qc|ns|mb)\b", text):
         return "canada_unspecified" if text in ("canada", "canadian") else "other_canadian_city"
+    if us or re.search(r"\b(?:china|shanghai|beijing|brazil|belo horizonte|california|new jersey|costa rica|malaysia|vietnam|norway|bengaluru|bucharest|singapore|india|united kingdom|germany|france|australia|israel|taiwan|japan|poland|ireland|netherlands)\b", text):
+        return "non_canada"
+    if re.search(r"\b(?:san francisco|new york|seattle|boston|palo alto|menlo park|mountain view|santa clara|sunnyvale|los angeles|chicago|bellevue|redmond)\b", text) or re.search(r",\s*(?:ca|ny|wa|ma|tx|il|ga|co|or|nj|va|nc|fl|az)\b", text):
+        return "non_canada"
     return "unknown"
 
 
@@ -174,7 +173,7 @@ def match_job(job, profile, require_internship=True):
     year_fit = "compatible" if not years or year in years else "incompatible"
     if year_fit == "incompatible":
         warnings.append("Student year requirement may not fit")
-    matched = bool(overlap) and not excluded and (eligibility is True or not require_internship) and season_fit != "other" and year_fit != "incompatible" and location not in {"us", "international"} and location_fit != "outside_preference" and not (profile.get("javascript_preference") == "avoid_high" and js == "HIGH" and families <= {"frontend", "general_swe"})
+    matched = bool(overlap) and not excluded and (eligibility is True or not require_internship) and season_fit != "other" and year_fit != "incompatible" and (location != "non_canada" or location in wanted) and location_fit != "outside_preference" and not (profile.get("javascript_preference") == "avoid_high" and js == "HIGH" and families <= {"frontend", "general_swe"})
     return {
         "profile_id": profile["id"],
         "matched": matched,

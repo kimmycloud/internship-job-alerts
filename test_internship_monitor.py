@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from internship_monitor import build_report, main, print_report, source_coverage, fetch_jobs
+from internship_monitor import build_report, main, print_report, source_coverage, fetch_jobs, safe_source_error
 from job_normalizer import deduplicate, freshness, normalize_job
 
 
@@ -34,6 +34,19 @@ def raw(title, location='Toronto, ON', description='', job_id='1', **extra):
 
 
 class MonitorTests(unittest.TestCase):
+    def test_safe_provider_diagnostics(self):
+        self.assertEqual(safe_source_error(ValueError('Malformed ATS job entry')), 'Malformed ATS job entry')
+        self.assertEqual(safe_source_error(ValueError('private token=SECRET')), 'ValueError')
+        def fail(_source):
+            raise ValueError('Malformed ATS job entry')
+        _, errors, _ = fetch_jobs([{'employer': 'P&G', 'provider': 'workday'}], fail)
+        self.assertEqual(errors, [{'source': 'P&G', 'provider': 'workday',
+                                   'error_type': 'ValueError', 'message': 'Malformed ATS job entry'}])
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            print_report(build_report([], PROFILES, errors))
+        self.assertIn('P&G [workday]: Malformed ATS job entry', output.getvalue())
+
     def test_role_cases(self):
         cases = [
             ('ML Infrastructure Intern Summer 2027', 'Toronto, ON', 'Rust model serving', 'sample_platform'),
@@ -69,13 +82,13 @@ class MonitorTests(unittest.TestCase):
     def test_remote_hybrid_and_js(self):
         cases = [('Remote - Canada', 'remote_canada'), ('Remote', 'unknown'),
                  ('Hybrid Toronto, ON', 'toronto_gta'), ('Hybrid Ottawa, ON', 'ottawa'),
-                 ('United States (Remote)', 'us'), ('Singapore', 'international')]
+                 ('United States (Remote)', 'non_canada'), ('Singapore', 'non_canada')]
         for location, expected in cases:
             with self.subTest(location=location):
                 self.assertEqual(normalize_job(raw('Backend Intern', location))['location_normalized'], expected)
         self.assertEqual(normalize_job(raw('Frontend React Intern', description='React JavaScript TypeScript CSS'))['js_intensity'], 'HIGH')
         self.assertEqual(normalize_job(raw('Backend Intern', description='Python databases'))['js_intensity'], 'LOW')
-        self.assertEqual(normalize_job(raw('Software Engineer Intern - Austin, TX', 'In-Office'))['location_normalized'], 'us')
+        self.assertEqual(normalize_job(raw('Software Engineer Intern - Austin, TX', 'In-Office'))['location_normalized'], 'non_canada')
 
     def test_incidental_hardware_description_does_not_match_software(self):
         job = raw('Digital Design Engineer Intern', description='ASIC and RTL design with a software team. ML infrastructure is a partner.')
@@ -100,6 +113,9 @@ class MonitorTests(unittest.TestCase):
         old_board = raw('Firmware Engineer Intern', job_id='old')
         old_board['employer'] = 'Example Early Career 2026'
         self.assertEqual(normalize_job(old_board)['summer_2027_relevance'], 'other')
+        self.assertEqual(normalize_job(raw('Software Intern Summer 2027'))['summer_2027_relevance'], 'target')
+        self.assertEqual(normalize_job(raw('Software Intern Fall 2027'))['summer_2027_relevance'], 'other')
+        self.assertEqual(normalize_job(raw('Software Intern'))['summer_2027_relevance'], 'unknown')
 
     def test_private_data_not_in_report_or_output_and_no_discord(self):
         sentinel = 'PRIVATE_SKILL_SENTINEL'
@@ -129,6 +145,22 @@ class MonitorTests(unittest.TestCase):
                     self.assertEqual(main(['--dry-run', '--report-file', str(report_path)]), 0)
             self.assertTrue(report_path.exists())
             self.assertIn('profile_03', report_path.read_text())
+
+    def test_cli_preserves_failure_exit_and_safe_error(self):
+        anonymous = {f'profile_{index:02d}': {**profile, 'id': f'profile_{index:02d}'}
+                     for index, profile in enumerate(PROFILES.values(), 1)}
+        error = {'source': 'P&G', 'provider': 'workday', 'error_type': 'ValueError',
+                 'message': 'Malformed ATS job entry'}
+        with tempfile.TemporaryDirectory() as directory, \
+             patch('internship_monitor.load_profiles', return_value=anonymous), \
+             patch('internship_monitor.monitored_sources', return_value=[]), \
+             patch('internship_monitor.fetch_jobs', return_value=([], [error], {})):
+            output = io.StringIO()
+            report_path = Path(directory) / 'report.json'
+            with contextlib.redirect_stdout(output):
+                self.assertEqual(main(['--dry-run', '--top', '0', '--report-file', str(report_path)]), 1)
+            self.assertIn('P&G [workday]: Malformed ATS job entry', output.getvalue())
+            self.assertEqual(json.loads(report_path.read_text())['summary']['provider_errors'], [error])
 
     def test_coverage_and_valid_zero_versus_failure(self):
         with tempfile.TemporaryDirectory() as directory:
