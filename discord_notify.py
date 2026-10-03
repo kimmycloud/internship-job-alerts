@@ -98,6 +98,46 @@ def send_internship_alert(
     _send(webhook, payload)
 
 
+def send_new_job_alert(job, profile_ids, profiles):
+    """Send one concise message per job; private mentions exist only at runtime."""
+    webhook = os.environ['INTERNSHIP_DISCORD_WEBHOOK_URL']
+    labels, mention_ids = [], []
+    for profile_id in profile_ids:
+        if not re.fullmatch(r'profile_0[1-4]', profile_id):
+            raise ValueError('Invalid anonymous profile ID')
+        discord_id = profiles[profile_id].get('discord_user_id')
+        if discord_id:
+            if not re.fullmatch(r'\d{17,20}', discord_id):
+                raise ValueError('Invalid private Discord user ID')
+            mention_ids.append(discord_id)
+        evidence = job['matches'][profile_id]
+        families = ', '.join(evidence['role_match'])
+        label = f'{profile_id} — {families}'
+        if discord_id:
+            label += f' <@{discord_id}>'
+        labels.append(label)
+    description = '🚨 **NEW INTERNSHIP**'
+    if job['bucket'] == 'NEW':
+        description += '\n🔥 **POSTED WITHIN 1 DAY**'
+    fields = [
+        {'name': '📍 Location', 'value': job['location'] or 'Unknown', 'inline': True},
+        {'name': '🎯 Matches', 'value': '\n'.join(labels), 'inline': False},
+        {'name': 'Role families', 'value': ', '.join(job['role_families']), 'inline': True},
+        {'name': 'Term', 'value': 'Summer 2027' if job['summer_2027_relevance'] == 'target' else 'Unknown', 'inline': True},
+        {'name': 'Posted', 'value': job['posted_date'] or 'Unknown', 'inline': True},
+        {'name': 'Source', 'value': job['provider'].title(), 'inline': True},
+    ]
+    if job['js_intensity'] != 'LOW':
+        fields.append({'name': 'JavaScript intensity', 'value': job['js_intensity'], 'inline': True})
+    if job['summer_2027_relevance'] == 'unknown':
+        fields.append({'name': 'Uncertainty', 'value': 'Term not specified', 'inline': False})
+    payload = {'allowed_mentions': {'users': mention_ids},
+               'embeds': [{'title': f"{job['company']} — {job['title']}",
+                           'url': job['url'], 'description': description,
+                           'fields': fields}]}
+    _send(webhook, payload)
+
+
 def send_monitor_error(
     source,
     error,

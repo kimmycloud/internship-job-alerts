@@ -10,4 +10,5 @@ candidate_profiles.json
 !.env.example
 dry_run_matches.json
 dry_run_*.json
+internship_alert_state.json.lock
 *.log

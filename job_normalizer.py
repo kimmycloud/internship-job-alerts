@@ -71,6 +71,16 @@ def identity(job):
     return ('url', company, url.netloc.lower(), path) if path else ('unique', id(job))
 
 
+def stable_identity(job):
+    """Persistent identity; never fall back to a title or process-local value."""
+    company = re.sub(r'\W+', '', job['company'].casefold())
+    provider = job['provider'].casefold()
+    source_id = str(job['source_job_id']).strip()
+    if not company or not provider or not source_id:
+        raise ValueError('Job has no stable provider identity')
+    return f'{company}:{provider}:{source_id}'
+
+
 def deduplicate(jobs):
     seen = set()
     unique = []

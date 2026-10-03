@@ -1,5 +1,6 @@
 """Public Workday CXS jobs adapter, using each configured tenant endpoint."""
 
+import re
 from urllib.parse import urlsplit
 
 from .http import get_json, require_job
@@ -31,9 +32,12 @@ def fetch_workday_jobs(source):
                 raise ValueError('Duplicate Workday job ID')
             seen.add(path)
             base = source['careers_url'].rstrip('/')
+            requisition = re.search(r'_(R[-_]?\d+|JR[-_]?\d+|REQ[-_]?\d+)$',
+                                    path.rstrip('/'), re.I)
+            stable_id = requisition.group(1).upper() if requisition else path
             result.append({'source': 'workday', 'employer': source['employer'],
                            'canonical_employer': source.get('canonical_employer', source['employer']),
-                           'job_id': path, 'title': job['title'],
+                           'job_id': stable_id, 'title': job['title'],
                            'location': job.get('locationsText') or '',
                            'url': base + path, 'description': '',
                            'posted_date': None})

@@ -105,5 +105,16 @@ class AdapterTests(unittest.TestCase):
             fetch_workday_jobs(source('workday'))
 
 
+    def test_workday_uses_requisition_id_across_title_slug_changes(self):
+        paths = ['/job/Toronto/Backend-Intern_R12345',
+                 '/job/Toronto/Software-Intern_R12345']
+        ids = []
+        for path in paths:
+            with patch('sources.workday.get_json', return_value={
+                'total': 1, 'jobPostings': [{'externalPath': path, 'title': 'Intern'}]}):
+                ids.append(fetch_workday_jobs(source('workday'))[0]['job_id'])
+        self.assertEqual(ids, ['R12345', 'R12345'])
+
+
 if __name__ == '__main__':
     unittest.main()
