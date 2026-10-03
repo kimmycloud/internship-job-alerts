@@ -90,6 +90,18 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual(normalize_job(raw('Backend Intern', description='Python databases'))['js_intensity'], 'LOW')
         self.assertEqual(normalize_job(raw('Software Engineer Intern - Austin, TX', 'In-Office'))['location_normalized'], 'non_canada')
 
+    def test_workday_path_location_when_display_is_generic(self):
+        sample = raw('Software Engineering Intern', '5 Locations')
+        sample['url'] = 'https://example.invalid/job/US-Oregon-Hillsboro_R123'
+        normalized = normalize_job(sample)
+        self.assertEqual(normalized['location_normalized'], 'non_canada')
+        self.assertEqual(build_report([sample], PROFILES)['summary']['matched_jobs'], 0)
+        sample['url'] = 'https://example.invalid/job/R123'
+        self.assertEqual(normalize_job(sample)['location_normalized'], 'unknown')
+        sample['location'] = 'Toronto, Canada; Hillsboro, Oregon'
+        sample['url'] = 'https://example.invalid/job/US-Oregon-Hillsboro_R123'
+        self.assertEqual(normalize_job(sample)['location_normalized'], 'toronto_gta')
+
     def test_incidental_hardware_description_does_not_match_software(self):
         job = raw('Digital Design Engineer Intern', description='ASIC and RTL design with a software team. ML infrastructure is a partner.')
         report = build_report([job], PROFILES)

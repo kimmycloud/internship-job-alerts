@@ -6,8 +6,8 @@ import re
 
 FAMILY_PATTERNS = {
     "ml_infra": r"\b(?:ml|machine learning|ai) infrastructure\b|\bml platform\b",
-    "ml_systems": r"\b(?:ml|machine learning) systems?\b|\bmodel serving\b",
-    "ai_software": r"\b(?:ai|artificial intelligence) software\b|\bai engineer(?:ing)?\b",
+    "ml_systems": r"\b(?:ml|machine learning) (?:systems?|engineer(?:ing)?)\b|\bmodel serving\b",
+    "ai_software": r"\b(?:ai|artificial intelligence|ai/ml) software\b|\bai engineer(?:ing)?\b",
     "distributed_systems": r"\bdistributed systems?\b",
     "frontend": r"\bfront[ -]?end\b|\bui engineer(?:ing)?\b|\breact\b",
     "backend": r"\bback[ -]?end\b|\bserver[ -]?side\b|\bapi development\b",
@@ -16,7 +16,7 @@ FAMILY_PATTERNS = {
     "systems": r"\bsystems? software\b|\bsystems? engineer(?:ing)?\b|\boperating systems?\b",
     "data": r"\bdata engineer(?:ing)?\b|\bdata platform\b|\bdata pipelines?\b",
     "embedded": r"\bembedded\b|\bfirmware\b",
-    "networking": r"\bnetwork(?:ing)? engineer(?:ing)?\b|\bnetwork protocols?\b",
+    "networking": r"\bnetwork(?:ing)? engineer(?:ing)?\b|\bnetwork protocols?\b|\bnetworking\b",
     "telecom": r"\btelecom(?:munications?)?\b|\b5g\b|\bradio access network\b",
     "hardware_design": r"\bhardware (?:design|engineer(?:ing)?)\b",
     "design_verification": r"\bdesign verification\b|\b(?:dv|uvm) engineer(?:ing)?\b|\buvm\b",
@@ -38,7 +38,14 @@ STUDENT_TERMS = re.compile(r"\b(?:intern(?:ship)?|co[ -]?op|student|pey)\b", re.
 FULL_TIME_TERMS = re.compile(r"\b(?:full[ -]?time|permanent|new grad(?:uate)?|experienced hire)\b", re.I)
 SENIOR_TERMS = re.compile(r"\b(?:senior|staff|principal|director|manager)\b", re.I)
 EXPERIENCE_TERMS = re.compile(r"\b(?:[5-9]|1[0-9])\+? years? (?:of )?(?:professional|industry|work) experience\b", re.I)
-GRADUATE_ONLY = re.compile(r"\b(?:graduate degree required|master'?s degree required|ph\.?d\.? required)\b", re.I)
+GRADUATE_LEVEL = r"(?:graduate|master'?s?|masters|ph\.?d\.?|doctoral)"
+GRADUATE_SUBJECT = rf"\b{GRADUATE_LEVEL}\s+(?:student|degree|program|studies|enrollment)\b"
+GRADUATE_REQUIRED = re.compile(
+    rf"(?:\brequired\s*[:\-]\s*{GRADUATE_SUBJECT}"
+    rf"|\bmust\s+(?:be|have|hold|pursue|be enrolled in)\s+(?:an?\s+)?{GRADUATE_SUBJECT}"
+    rf"|{GRADUATE_SUBJECT}[^.!?;]{{0,90}}\b(?:required|must|only|currently enrolled)\b"
+    rf"|\b(?:enrolled|enrollment)\s+in\s+(?:an?\s+)?{GRADUATE_LEVEL}\s+(?:degree|program)\b)", re.I)
+GRADUATE_PREFERRED = re.compile(rf"{GRADUATE_SUBJECT}[^.!?;]{{0,50}}\b(?:preferred|a plus|desirable)\b|\b(?:preferred|a plus|desirable)\b[^.!?;]{{0,50}}{GRADUATE_SUBJECT}", re.I)
 JS_TERMS = re.compile(r"\b(?:javascript|typescript|react|vue|angular|node\.?js|next\.?js|js|ts)\b", re.I)
 FRONTEND_TERMS = re.compile(r"\b(?:front[ -]?end|ui|web application|react|vue|angular|html|css)\b", re.I)
 
@@ -62,9 +69,9 @@ def normalize_location(location):
         return "ottawa"
     if canada or re.search(r"\b(?:vancouver|montreal|montréal|calgary|edmonton|waterloo|kitchener|hamilton|halifax|winnipeg|victoria|quebec|québec|on|bc|ab|qc|ns|mb)\b", text):
         return "canada_unspecified" if text in ("canada", "canadian") else "other_canadian_city"
-    if us or re.search(r"\b(?:china|shanghai|beijing|brazil|belo horizonte|california|new jersey|costa rica|malaysia|vietnam|norway|bengaluru|bucharest|singapore|india|united kingdom|germany|france|australia|israel|taiwan|japan|poland|ireland|netherlands)\b", text):
+    if us or re.search(r"\b(?:china|shanghai|beijing|brazil|belo horizonte|california|new jersey|oregon|texas|costa rica|malaysia|vietnam|norway|bengaluru|bucharest|singapore|india|united kingdom|germany|france|australia|israel|taiwan|japan|poland|ireland|netherlands)\b", text):
         return "non_canada"
-    if re.search(r"\b(?:san francisco|new york|seattle|boston|palo alto|menlo park|mountain view|santa clara|sunnyvale|los angeles|chicago|bellevue|redmond)\b", text) or re.search(r",\s*(?:ca|ny|wa|ma|tx|il|ga|co|or|nj|va|nc|fl|az)\b", text):
+    if re.search(r"\b(?:austin|san jose|san francisco|new york|seattle|boston|palo alto|menlo park|mountain view|santa clara|sunnyvale|los angeles|chicago|bellevue|redmond)\b", text) or re.search(r",\s*(?:ca|ny|wa|ma|tx|il|ga|co|or|nj|va|nc|fl|az)\b", text):
         return "non_canada"
     return "unknown"
 
@@ -74,6 +81,8 @@ def classify_role_families(job):
     description = html.unescape(re.sub(r"<[^>]+>", " ", _text(job.get("description") or job.get("description_html"))))
     title_hits = {family for family, pattern in FAMILY_PATTERNS.items() if re.search(pattern, title, re.I)}
     description_hits = {family for family, pattern in FAMILY_PATTERNS.items() if re.search(pattern, description, re.I)}
+    supported_description = {family for family, pattern in FAMILY_PATTERNS.items()
+                             if len(re.findall(pattern, description, re.I)) >= 2}
     technical_title = re.search(r"\b(?:software|engineer(?:ing)?|developer|programmer|data|machine learning|ai|hardware|firmware|embedded|systems?|network(?:ing)?|telecom|asic|fpga|rtl|verification|robotics?|silicon|semiconductor|chip|circuit|electrical|electronics|analog|digital|ate|dft|emulation)\b", title, re.I)
     if not technical_title:
         return title_hits
@@ -83,7 +92,8 @@ def classify_role_families(job):
     # A title's specific discipline outranks incidental mentions in a description.
     specific_title = title_hits - {"general_swe"}
     if specific_title:
-        return title_hits | (description_hits & HARDWARE_FAMILIES if title_hits & HARDWARE_FAMILIES else set())
+        secondary = description_hits & HARDWARE_FAMILIES if title_hits & HARDWARE_FAMILIES else set()
+        return title_hits | secondary | (supported_description - {"general_swe"})
     if 'general_swe' in title_hits:
         description_hits -= HARDWARE_FAMILIES
     return title_hits | description_hits
@@ -106,7 +116,7 @@ def internship_eligibility(job):
     title = _text(job.get("title"))
     employment = _text(job.get("employment_type"))
     description = html.unescape(re.sub(r"<[^>]+>", " ", _text(job.get("description") or job.get("description_html"))))
-    if SENIOR_TERMS.search(title) or EXPERIENCE_TERMS.search(description) or GRADUATE_ONLY.search(description):
+    if SENIOR_TERMS.search(title) or EXPERIENCE_TERMS.search(description):
         return False
     if FULL_TIME_TERMS.search(title) and not STUDENT_TERMS.search(title):
         return False
@@ -122,11 +132,26 @@ def internship_eligibility(job):
     return None
 
 
+def graduate_requirement(job):
+    """Classify explicit graduate enrollment, without guessing from a degree mention."""
+    title = _text(job.get("title"))
+    description = html.unescape(re.sub(r"<[^>]+>", " ", _text(job.get("description") or job.get("description_html"))))
+    if STUDENT_TERMS.search(title) and re.search(rf"\b{GRADUATE_LEVEL}\b", title, re.I) and not re.search(r'\bpreferred\b', title, re.I):
+        return "required"
+    if GRADUATE_REQUIRED.search(description):
+        return "required"
+    if GRADUATE_PREFERRED.search(description):
+        return "preferred"
+    return "unknown"
+
+
 def match_job(job, profile, require_internship=True):
     """Return a decision with discrete evidence and anonymous profile ID."""
     families = classify_role_families(job)
     location = job.get('location_normalized') or normalize_location(job.get("location"))
     eligibility = internship_eligibility(job)
+    graduate = graduate_requirement(job)
+    graduate_fit = graduate != "required" or profile["education"].get("level") == "graduate"
     overlap = sorted(families & set(profile["role_families"]))
     excluded = sorted(families & set(profile.get("excluded_role_families", [])))
     # Hardware evidence may override a general software label on embedded roles.
@@ -153,6 +178,8 @@ def match_job(job, profile, require_internship=True):
         warnings.append("Outside preferred locations")
     if excluded:
         warnings.append("Excluded role family: " + ", ".join(excluded))
+    if not graduate_fit:
+        warnings.append("Graduate enrollment required")
     if profile.get("javascript_preference") == "avoid_high" and js == "HIGH":
         warnings.append("High JavaScript intensity")
     description = _text(job.get("description") or job.get("description_html"))
@@ -173,12 +200,13 @@ def match_job(job, profile, require_internship=True):
     year_fit = "compatible" if not years or year in years else "incompatible"
     if year_fit == "incompatible":
         warnings.append("Student year requirement may not fit")
-    matched = bool(overlap) and not excluded and (eligibility is True or not require_internship) and season_fit != "other" and year_fit != "incompatible" and (location != "non_canada" or location in wanted) and location_fit != "outside_preference" and not (profile.get("javascript_preference") == "avoid_high" and js == "HIGH" and families <= {"frontend", "general_swe"})
+    matched = bool(overlap) and not excluded and (eligibility is True or not require_internship) and graduate_fit and season_fit != "other" and year_fit != "incompatible" and (location != "non_canada" or location in wanted) and location_fit != "outside_preference" and not (profile.get("javascript_preference") == "avoid_high" and js == "HIGH" and families <= {"frontend", "general_swe"})
     return {
         "profile_id": profile["id"],
         "matched": matched,
         "score_components": {
             "internship_eligibility": eligibility,
+            "graduate_requirement": graduate,
             "role_families": overlap,
             "location": location,
             "location_fit": location_fit,

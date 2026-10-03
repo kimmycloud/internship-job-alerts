@@ -2,7 +2,7 @@
 
 from datetime import datetime, timezone
 import re
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 from job_matcher import (classify_role_families, internship_eligibility,
                          javascript_intensity, normalize_location)
@@ -41,6 +41,16 @@ def normalize_job(raw):
         if title_location in {'non_canada', 'toronto_gta', 'ottawa', 'other_canadian_city'}:
             job['location_normalized'] = title_location
             job['normalized_location'] = title_location
+    if job['location_normalized'] == 'unknown':
+        # Workday requisition paths sometimes encode the selected office while
+        # the displayed location is only a count (for example, "5 Locations").
+        path = unquote(urlsplit(job['url']).path)
+        if re.search(r'(?<![A-Za-z])(?:Canada[-_](?:Ontario[-_])?(?:Toronto|Ottawa)|CA[-_]Ontario[-_](?:Toronto|Ottawa))(?![A-Za-z])', path, re.I):
+            job['location_normalized'] = normalize_location(path)
+            job['normalized_location'] = job['location_normalized']
+        elif re.search(r'(?<![A-Za-z])US[-_](?:Oregon|Texas|Washington|California|New[-_]York)[-_][A-Za-z]+(?![A-Za-z])', path, re.I):
+            job['location_normalized'] = 'non_canada'
+            job['normalized_location'] = 'non_canada'
     text = title + ' ' + re.sub(r'<[^>]+>', ' ', description)
     terms = {(m.group(1).lower().replace('autumn', 'fall'), m.group(2))
              for m in re.finditer(r'\b(summer|fall|autumn|winter|spring)\s+(20\d{2})\b', text, re.I)}

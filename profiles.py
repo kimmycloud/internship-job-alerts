@@ -51,6 +51,8 @@ def validate_profiles(data):
         education = profile.get("education")
         if not isinstance(education, dict) or type(education.get("year")) is not int or not 1 <= education["year"] <= 8 or not isinstance(education.get("degree"), str) or not education["degree"].strip():
             raise ProfileError("Invalid candidate education")
+        if "level" in education and education["level"] not in ("undergraduate", "graduate"):
+            raise ProfileError("Invalid candidate education")
         if not _string_list(profile.get("role_families"), ROLE_FAMILIES) or not profile["role_families"]:
             raise ProfileError("Invalid candidate role families")
         for field, allowed in (("preferred_locations", LOCATIONS), ("target_seasons", None), ("skills", None), ("excluded_role_families", ROLE_FAMILIES)):

@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from job_matcher import javascript_intensity, match_job, normalize_location
+from job_matcher import classify_role_families, graduate_requirement, javascript_intensity, match_job, normalize_location
 from profiles import ProfileError, load_profiles, validate_profiles
 
 
@@ -33,6 +33,13 @@ def job(title, location="Toronto, ON", description="", **extra):
 
 
 class LoaderTests(unittest.TestCase):
+    def test_optional_graduate_level(self):
+        profile = {**SYNTHETIC['profiles'][0], 'education': {'year': 1, 'degree': 'Computing', 'level': 'graduate'}}
+        self.assertIn('sample_ml', validate_profiles({'schema_version': 1, 'profiles': [profile]}))
+        profile['education']['level'] = 'unknown'
+        with self.assertRaises(ProfileError):
+            validate_profiles({'schema_version': 1, 'profiles': [profile]})
+
     def test_mobile_and_explicit_foreign_preference_are_valid(self):
         data = {"schema_version": 1, "profiles": [{**SYNTHETIC['profiles'][0],
                 "role_families": ["mobile"], "preferred_locations": ["non_canada"]}]}
@@ -83,6 +90,27 @@ class MatcherTests(unittest.TestCase):
         result = match_job(job("Backend Software Engineer - Full Time", description="Students are welcome to apply"), self.profiles["sample_ml"])
         self.assertFalse(result["matched"])
 
+    def test_graduate_enrollment_requirement(self):
+        undergraduate = {**self.profiles['sample_ml'], 'role_families': ['general_swe']}
+        graduate = {**undergraduate, 'education': {**undergraduate['education'], 'level': 'graduate'}}
+        cases = [
+            ('Graduate Student Intern - Software Engineering', '', 'required', False),
+            ('Software Engineering Intern', "Master's or PhD student required", 'required', False),
+            ('Software Engineering Intern', 'Graduate degree preferred', 'preferred', True),
+            ('Software Engineering Intern', "Bachelor's degree required, graduate degree preferred", 'preferred', True),
+            ('Software Engineering Intern', "Currently pursuing a Bachelor's or Master's degree", 'unknown', True),
+            ('PhD Software Engineering Intern', '', 'required', False),
+            ("Bachelor's student Software Engineering internship", '', 'unknown', True),
+            ('Software Engineering Intern', "Applicants may have a Master's degree", 'unknown', True),
+        ]
+        for title, description, requirement, allowed in cases:
+            with self.subTest(title=title, description=description):
+                sample = job(title, description=description)
+                self.assertEqual(graduate_requirement(sample), requirement)
+                self.assertEqual(match_job(sample, undergraduate)['matched'], allowed)
+                if requirement == 'required':
+                    self.assertTrue(match_job(sample, graduate)['matched'])
+
     def test_location_normalization(self):
         cases = {"Mississauga, ON": "toronto_gta", "Kanata, Ontario": "ottawa",
                  "Remote - Canada": "remote_canada", "Remote": "unknown",
@@ -121,6 +149,44 @@ class MatcherTests(unittest.TestCase):
         self.assertEqual(normalize_location('London'), 'unknown')
         allowed = {**self.profiles['sample_ml'], 'preferred_locations': ['non_canada']}
         self.assertTrue(match_job(job('ML Infrastructure Intern', 'China, Shanghai'), allowed)['matched'])
+
+    def test_conservative_us_and_mixed_locations(self):
+        cases = {
+            'AUSTIN': 'non_canada', 'Austin, TX': 'non_canada',
+            'Hillsboro, Oregon': 'non_canada', 'Seattle, WA': 'non_canada',
+            'New York, NY': 'non_canada', 'San Jose, CA': 'non_canada',
+            '5 Locations': 'unknown',
+            'San Jose, CA or Toronto, Ontario, Canada': 'toronto_gta',
+            'Ottawa, Ontario, Canada and Austin, TX': 'ottawa',
+            'Remote Canada': 'remote_canada', 'Canada': 'canada_unspecified',
+            'Shanghai, China and Austin, TX': 'non_canada',
+        }
+        for location, expected in cases.items():
+            with self.subTest(location=location):
+                self.assertEqual(normalize_location(location), expected)
+
+    def test_clear_title_families_with_supporting_description(self):
+        cases = [
+            ('Machine Learning Engineering Intern', 'Build backend services and backend APIs', {'ml_systems', 'backend'}),
+            ('AI/ML Software Intern', '', {'ai_software'}),
+            ('Software Engineering, Optical Transport and IP Networking Intern', '', {'networking'}),
+            ('Telecom Software Intern', '', {'telecom'}),
+            ('Embedded Systems Intern', '', {'embedded'}),
+            ('Firmware Intern', '', {'embedded'}),
+            ('FPGA Intern', '', {'fpga'}),
+            ('ASIC Intern', '', {'asic'}),
+            ('Design Verification Intern', '', {'design_verification'}),
+            ('RTL Intern', '', {'rtl'}),
+            ('Frontend Intern', '', {'frontend'}),
+            ('Backend Intern', '', {'backend'}),
+            ('Full Stack Intern', '', {'full_stack'}),
+            ('iOS Mobile Intern', '', {'mobile'}),
+        ]
+        for title, description, expected in cases:
+            with self.subTest(title=title):
+                self.assertTrue(expected <= classify_role_families(job(title, description=description)))
+        self.assertNotIn('ml_systems', classify_role_families(job('Software Engineering Intern', description='Use an ML library once')))
+        self.assertNotIn('mobile', classify_role_families(job('Backend Intern', description='API serves mobile clients')))
 
     def test_mobile_title_overrides_incidental_backend(self):
         from job_matcher import classify_role_families
