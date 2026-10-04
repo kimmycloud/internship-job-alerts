@@ -34,15 +34,21 @@ class AlertStateTests(unittest.TestCase):
         self.path = Path(self.temp.name) / 'state.json'
         self.sender = Mock()
 
-    def run_jobs(self, jobs, mode='production', profiles=None, sources=None):
+    def run_jobs(self, jobs, mode='production', profiles=None, sources=None,
+                 now='2026-10-03T00:00:00+00:00'):
         return process_jobs(jobs, profiles or PROFILES, [SOURCE] if sources is None else sources,
-                            self.path, mode, sender=self.sender, now='2026-10-03T00:00:00+00:00')
+                            self.path, mode, sender=self.sender, now=now)
 
     def test_initial_baseline_and_unchanged_run(self):
         self.assertEqual(self.run_jobs([job()], 'baseline')['sent'], 0)
-        self.assertEqual(self.run_jobs([job()])['sent'], 0)
+        before = self.path.read_bytes()
+        before_mtime = self.path.stat().st_mtime_ns
+        self.assertEqual(self.run_jobs([job()], now='2026-10-04T00:00:00+00:00')['sent'], 0)
         self.sender.assert_not_called()
-        self.assertEqual(next(iter(read_state(self.path)['jobs'].values()))['status'], 'baselined')
+        self.assertEqual(self.path.read_bytes(), before)
+        self.assertEqual(self.path.stat().st_mtime_ns, before_mtime)
+        self.assertEqual(read_state(self.path)['jobs'], {})
+        self.assertEqual(len(read_state(self.path)['seen_job_ids']), 1)
 
     def test_new_job_one_message_three_matches_and_reload(self):
         self.run_jobs([job()], 'baseline')
@@ -52,7 +58,7 @@ class AlertStateTests(unittest.TestCase):
         self.assertEqual(self.sender.call_count, 1)
         self.assertEqual(self.sender.call_args.args[1], ['profile_01', 'profile_02', 'profile_03'])
         record = [r for r in read_state(self.path)['jobs'].values() if r['title'] == job('2')['title'] and r['status'] == 'alerted'][0]
-        self.assertEqual(record['alerted_profile_ids'], ['profile_01', 'profile_02', 'profile_03'])
+        self.assertEqual(record['matched_profile_ids'], ['profile_01', 'profile_02', 'profile_03'])
         self.assertEqual(self.run_jobs([job(), job('2')], profiles=three)['sent'], 0)
 
     def test_disappear_return_tracking_description_and_match_change(self):
@@ -62,7 +68,7 @@ class AlertStateTests(unittest.TestCase):
         changed = job(description='Completely rewritten role', url='https://example.invalid/jobs/1?utm_source=b')
         self.run_jobs([changed], profiles={'profile_01': PROFILES['profile_01']})
         self.assertEqual(self.sender.call_count, 1)
-        self.assertTrue(next(iter(read_state(self.path)['jobs'].values()))['present'])
+        self.assertEqual(next(iter(read_state(self.path)['jobs'].values()))['status'], 'alerted')
 
     def test_distinct_ids_same_title(self):
         self.run_jobs([], 'baseline')
@@ -75,9 +81,17 @@ class AlertStateTests(unittest.TestCase):
         self.assertEqual(self.run_jobs([job()])['failed'], 1)
         record = next(iter(read_state(self.path)['jobs'].values()))
         self.assertEqual(record['status'], 'pending')
-        self.assertEqual(record['alerted_profile_ids'], [])
+        self.assertEqual(record['matched_profile_ids'], ['profile_01', 'profile_02', 'profile_03', 'profile_04'])
         self.assertEqual(self.run_jobs([job()])['sent'], 1)
         self.assertEqual(next(iter(read_state(self.path)['jobs'].values()))['status'], 'alerted')
+        self.assertEqual(self.sender.call_count, 2)
+
+    def test_failed_send_retries_after_disappearance(self):
+        self.run_jobs([], 'baseline')
+        self.sender.side_effect = [RuntimeError('temporary failure'), None]
+        self.assertEqual(self.run_jobs([job()])['failed'], 1)
+        self.run_jobs([])
+        self.assertEqual(self.run_jobs([job()])['sent'], 1)
         self.assertEqual(self.sender.call_count, 2)
 
     def test_nonmatching_foreign_graduate_and_wrong_term(self):
@@ -125,6 +139,29 @@ class AlertStateTests(unittest.TestCase):
         for value in ('PRIVATE_PERSON_SENTINEL', '123456789012345678', 'SECRET_SKILL_SENTINEL'):
             self.assertNotIn(value, serialized)
         self.assertIn('profile_01', serialized)
+
+    def test_old_nonmatching_job_becomes_matching_without_new_alert(self):
+        self.run_jobs([job(title='Accountant')], 'baseline')
+        self.assertEqual(self.run_jobs([job()])['sent'], 0)
+        self.sender.assert_not_called()
+
+    def test_baselined_job_disappears_and_returns_without_alert(self):
+        self.run_jobs([job()], 'baseline')
+        self.run_jobs([])
+        self.assertEqual(self.run_jobs([job()])['sent'], 0)
+        self.sender.assert_not_called()
+
+    def test_state_omits_description_payload_and_match_details(self):
+        self.run_jobs([], 'baseline')
+        self.run_jobs([job(description='SECRET_DESCRIPTION_SENTINEL',
+                           url='https://example.invalid/jobs/1')])
+        serialized = self.path.read_text()
+        self.assertNotIn('SECRET_DESCRIPTION_SENTINEL', serialized)
+        self.assertNotIn('description', serialized)
+        self.assertNotIn('reasons', serialized)
+        self.assertNotIn('last_seen', serialized)
+        self.assertNotIn('raw', serialized)
+        self.assertEqual(len(read_state(self.path)['seen_job_ids']), 1)
 
     def test_identity_ignores_url_tracking_and_requires_id(self):
         public = build_report([job()], PROFILES)['matched_jobs'][0]

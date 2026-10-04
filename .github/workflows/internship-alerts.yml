@@ -62,12 +62,7 @@ jobs:
           fi
           git commit -m 'Update internship alert state [skip ci]'
           git fetch origin main
-          base_state=$(git rev-parse HEAD^:internship_alert_state.json 2>/dev/null || true)
-          remote_state=$(git rev-parse origin/main:internship_alert_state.json 2>/dev/null || true)
-          if [ "$base_state" != "$remote_state" ]; then
-            echo 'Remote alert state changed during this run; refusing to overwrite it.' >&2
-            exit 1
-          fi
+          bash scripts/check_remote_alert_state.sh HEAD^ origin/main
           git rebase origin/main
           git push origin HEAD:main
       - name: Surface monitor health

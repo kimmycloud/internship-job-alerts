@@ -16,7 +16,7 @@ from job_normalizer import deduplicate, normalize_job, stable_identity
 from profiles import PUBLIC_PROFILE_IDS, ProfileError, load_profiles
 
 DEFAULT_STATE = ROOT / 'internship_alert_state.json'
-STATE_VERSION = 1
+STATE_VERSION = 2
 
 
 def source_key(provider, source_name):
@@ -41,6 +41,7 @@ def read_state(path):
     state = json.loads(path.read_text(encoding='utf-8'))
     if (state.get('schema_version') != STATE_VERSION or
             not isinstance(state.get('jobs'), dict) or
+            not isinstance(state.get('seen_job_ids'), list) or
             not isinstance(state.get('initialized_sources'), list)):
         raise ValueError('Invalid internship alert state')
     return state
@@ -48,12 +49,14 @@ def read_state(path):
 
 def write_state(path, state):
     """Atomically save after each successful delivery or retryable failure."""
+    serialized = json.dumps(state, indent=2, sort_keys=True, ensure_ascii=False) + '\n'
+    if path.exists() and path.read_text(encoding='utf-8') == serialized:
+        return
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, name = tempfile.mkstemp(prefix=f'.{path.name}.', dir=path.parent)
     try:
         with os.fdopen(fd, 'w', encoding='utf-8') as stream:
-            json.dump(state, stream, indent=2, sort_keys=True, ensure_ascii=False)
-            stream.write('\n')
+            stream.write(serialized)
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(name, path)
@@ -81,11 +84,13 @@ def process_jobs(raw_jobs, profiles, successful_sources, state_path, mode,
     if mode == 'baseline':
         if state is not None:
             raise ValueError('Baseline already exists; refusing to replace alert history')
-        state = {'schema_version': STATE_VERSION, 'initialized_sources': [], 'jobs': {}}
+        state = {'schema_version': STATE_VERSION, 'initialized_sources': [],
+                 'seen_job_ids': [], 'jobs': {}}
     elif mode == 'production' and state is None:
         raise ValueError('Missing baseline; run --baseline first')
     elif mode == 'dry-run':
-        state = state or {'schema_version': STATE_VERSION, 'initialized_sources': [], 'jobs': {}}
+        state = state or {'schema_version': STATE_VERSION, 'initialized_sources': [],
+                          'seen_job_ids': [], 'jobs': {}}
     else:
         if mode not in ('baseline', 'production'):
             raise ValueError('Invalid alert mode')
@@ -95,7 +100,8 @@ def process_jobs(raw_jobs, profiles, successful_sources, state_path, mode,
     normalized = deduplicate([normalize_job(raw) for raw in raw_jobs])
     initialized = set(state['initialized_sources'])
     successful = {source_key(source['provider'], source['employer']) for source in successful_sources}
-    seen = set()
+    previously_seen = set(state['seen_job_ids'])
+    seen = set(previously_seen)
     counts = {'baselined': 0, 'sent': 0, 'failed': 0, 'pending': 0, 'seen': 0}
     for job in normalized:
         key = stable_identity(job)
@@ -106,27 +112,24 @@ def process_jobs(raw_jobs, profiles, successful_sources, state_path, mode,
                              if decision['matched'])
         if any(pid not in PUBLIC_PROFILE_IDS for pid in profile_ids):
             raise ValueError('Unexpected profile ID in alert match')
-        old = state['jobs'].get(key)
-        if old is None:
-            record = {'company': job['company'], 'provider': job['provider'],
-                      'source_name': job['source_name'], 'title': job['title'],
-                      'url': job['url'], 'first_seen': now, 'last_seen': now,
-                      'matched_profile_ids': profile_ids, 'alerted_profile_ids': [],
-                      'status': 'baselined' if mode == 'baseline' or source not in initialized else 'seen',
-                      'present': True}
-            state['jobs'][key] = record
-        else:
-            record = old
-            record.update(title=job['title'], url=job['url'], last_seen=now,
-                          matched_profile_ids=profile_ids, present=True)
-        if record['status'] == 'baselined':
+        record = state['jobs'].get(key)
+        if mode == 'baseline' or source not in initialized:
             counts['baselined'] += 1
-        elif record['status'] == 'alerted':
+        elif record is not None and record['status'] == 'alerted':
             counts['seen'] += 1
-        elif (old is None or record['status'] == 'pending') and public_match and alertable(public_match):
+        elif (key not in previously_seen or
+              record is not None and record['status'] == 'pending') and public_match and alertable(public_match):
             if mode == 'production':
                 # The pre-send save makes a newly discovered job retryable after a crash.
-                record['status'] = 'pending'
+                if record is None:
+                    record = {'company': job['company'], 'title': job['title'],
+                              'url': job['url'], 'first_seen': now,
+                              'matched_profile_ids': profile_ids, 'status': 'pending'}
+                    state['jobs'][key] = record
+                else:
+                    record.update(title=job['title'], url=job['url'],
+                                  matched_profile_ids=profile_ids)
+                state['seen_job_ids'] = sorted(seen)
                 write_state(state_path, state)
                 try:
                     sender(public_match, profile_ids, profiles)
@@ -135,16 +138,13 @@ def process_jobs(raw_jobs, profiles, successful_sources, state_path, mode,
                     write_state(state_path, state)
                     continue
                 record['status'] = 'alerted'
-                record['alerted_profile_ids'] = profile_ids
                 write_state(state_path, state)
                 counts['sent'] += 1
             else:
                 counts['pending'] += 1
         else:
             counts['seen'] += 1
-    for key, record in state['jobs'].items():
-        if key not in seen and source_key(record['provider'], record['source_name']) in successful:
-            record['present'] = False
+    state['seen_job_ids'] = sorted(seen)
     state['initialized_sources'] = sorted(initialized | successful)
     if mode != 'dry-run':
         write_state(state_path, state)
