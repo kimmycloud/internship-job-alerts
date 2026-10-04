@@ -1,6 +1,8 @@
-name: Internship Alerts (manual)
+name: Internship Alerts
 
 on:
+  schedule:
+    - cron: '17 * * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -39,7 +41,7 @@ jobs:
         env:
           CANDIDATE_PROFILES_JSON: ${{ secrets.CANDIDATE_PROFILES_JSON }}
           INTERNSHIP_DISCORD_WEBHOOK_URL: ${{ secrets.INTERNSHIP_DISCORD_WEBHOOK_URL }}
-          ALERT_MODE: ${{ inputs.mode }}
+          ALERT_MODE: ${{ github.event_name == 'schedule' && 'production' || inputs.mode }}
         shell: bash
         run: |
           set +e
