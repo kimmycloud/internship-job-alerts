@@ -150,6 +150,16 @@
       "title": "ASIC Verification Intern - Summer 2027",
       "url": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Canada-Toronto/ASIC-Verification-Intern---Summer-2027_JR2027982"
     },
+    "spaceium:greenhouse:4475283009": {
+      "company": "Spaceium",
+      "first_seen": "2026-11-01T19:48:51.127705+00:00",
+      "matched_profile_ids": [
+        "profile_02"
+      ],
+      "status": "alerted",
+      "title": "Electrical Intern (Summer 27)",
+      "url": "https://job-boards.greenhouse.io/spaceium/jobs/4475283009"
+    },
     "tenstorrent:greenhouse:5256568007": {
       "company": "Tenstorrent",
       "first_seen": "2026-10-06T07:38:35.021346+00:00",
@@ -2707,6 +2717,7 @@
     "cisco:workday:/job/Caesarea-Israel/DevOps-Infrastructure-Engineer_2027194",
     "cisco:workday:/job/Caesarea-Israel/Engineering-Project-Manager_2022405",
     "cisco:workday:/job/Caesarea-Israel/FPGA-Design-Engineer--Cisco-Silicon-One_2029678",
+    "cisco:workday:/job/Caesarea-Israel/HW-Design-Leader--Cisco-Silicon-One_2030048",
     "cisco:workday:/job/Caesarea-Israel/Hardware-Engineer---High-Speed-Board-Design--Cisco-silicon-One_2009055-1",
     "cisco:workday:/job/Caesarea-Israel/Hardware-Engineer_2017544",
     "cisco:workday:/job/Caesarea-Israel/IC-Package-Design-Engineer--Cisco-Silicon-One_2028540",
@@ -4620,6 +4631,7 @@
     "cisco:workday:/job/Taipei-Taiwan/Supplier-Commodity-Manager_2016831",
     "cisco:workday:/job/Taipei-Taiwan/Supplier-Commodity-Manager_2016890",
     "cisco:workday:/job/Taipei-Taiwan/Supplier-Commodity-Manager_2024983",
+    "cisco:workday:/job/Taipei-Taiwan/Supplier-Commodity-Manager_2029000",
     "cisco:workday:/job/Taipei-Taiwan/Test-Development-Engineer_2026997",
     "cisco:workday:/job/Taipei-Taiwan/Test-Development-Engineer_2026998",
     "cisco:workday:/job/Taipei-Taiwan/Thermal-Engineering-Technical-Leader_2029655",
@@ -7602,6 +7614,7 @@
     "lumentum:workday:/job/Thailand---Pathumthani-Navanakorn/Staff-Test-Engineer_20261471",
     "lumentum:workday:/job/Thailand---Pathumthani-Navanakorn/Supplier-Quality-Engineer---Optical-Components_20261133",
     "lumentum:workday:/job/Thailand---Pathumthani-Navanakorn/Supply-Chain-Execution_2026988",
+    "lumentum:workday:/job/Thailand---Pathumthani-Navanakorn/Talent-Management-and-Learning-Manager_20261704-1",
     "lumentum:workday:/job/Thailand---Pathumthani-Navanakorn/Technician--Process_2024440",
     "lumentum:workday:/job/Thailand---Pathumthani-Navanakorn/Technician--Process_2024502",
     "lumentum:workday:/job/Thailand---Pathumthani-Navanakorn/Test-Engineer-Staff_20251925",
@@ -12807,6 +12820,7 @@
     "nvidia:workday:JR2028264",
     "nvidia:workday:JR2028265",
     "nvidia:workday:JR2028279",
+    "nvidia:workday:JR2028280",
     "nvidia:workday:JR2028283",
     "nvidia:workday:JR2028290",
     "nvidia:workday:JR2028291",
@@ -12948,6 +12962,7 @@
     "nvidia:workday:JR2028890",
     "nvidia:workday:JR2028891",
     "nvidia:workday:JR2028892",
+    "nvidia:workday:JR2028899",
     "nvidia:workday:JR2028905",
     "nvidia:workday:JR2028923",
     "nvidia:workday:JR2028929",
@@ -15300,6 +15315,8 @@
     "spaceium:greenhouse:4368438009",
     "spaceium:greenhouse:4368439009",
     "spaceium:greenhouse:4404340009",
+    "spaceium:greenhouse:4475283009",
+    "spaceium:greenhouse:4475285009",
     "stripe:greenhouse:5416444",
     "stripe:greenhouse:5601879",
     "stripe:greenhouse:5601881",
@@ -20616,6 +20633,7 @@
     "td:workday:R_1519937",
     "td:workday:R_1519944",
     "td:workday:R_1520073",
+    "td:workday:R_1520100",
     "telesat:lever:014ae8af-a9e2-42ef-814b-287549725bc5",
     "telesat:lever:044f1b05-9325-450f-9323-9441a9a3a923",
     "telesat:lever:08cf625b-cb84-4b54-899c-26dd79c450d7",
